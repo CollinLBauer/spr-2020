@@ -26,10 +26,10 @@ Class Assignment Schedule
   <tr>
     <td>Assignment</td> 
     <td>Details</td> <!--Description of the assignment-->
-    <td>Type</td> <!--HW/Lab/Quiz/Test/Project/Other-->
+    <td>Type</td> <!--HW/Lab/Quiz/Test/NCL/Other-->
     <td>File</td> <!--Anchor w/ link to file & type of file-->
-    <td>Assign date</td>
-    <td>Due date</td>
+    <td>Assign<br/>date</td>
+    <td>Due<br/>date</td>
   </tr>
   <tr>
     <td>Homework 0</td>
@@ -106,7 +106,7 @@ Class Assignment Schedule
   <tr>
     <td>NCL</td>
     <td>Registration Deadline</td>
-    <td>Project</td>
+    <td>NCL</td>
     <td></td>
     <td>N/A</td>
     <td>Mar 20</td>
@@ -114,7 +114,7 @@ Class Assignment Schedule
   <tr>
     <td>NCL</td>
     <td>Mandatory Preseason</td>
-    <td>Project</td>
+    <td>NCL</td>
     <td></td>
     <td>Mar 23</td>
     <td>Mar 30</td>
@@ -130,7 +130,7 @@ Class Assignment Schedule
   <tr>
     <td>NCL</td>
     <td>Mandatory Individual Game</td>
-    <td>Project</td>
+    <td>NCL</td>
     <td></td>
     <td>Apr 03</td>
     <td>Apr 05</td>
