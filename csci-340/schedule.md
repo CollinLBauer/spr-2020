@@ -3,7 +3,7 @@ table {
   border: 2px solid #000;
 }
 tr {
-    border-bottom: 3px solid #123;
+    border-bottom: 2px solid #123;
     background: #234
 }
 tr:first-child {

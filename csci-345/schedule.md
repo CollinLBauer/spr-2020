@@ -1,9 +1,9 @@
 <style>
 table {
-  border: 2px solid #000;
+  border: 3px solid #000;
 }
 tr {
-    border-bottom: 3px solid #123;
+    border-bottom: 2px solid #123;
     background: #234
 }
 tr:first-child {
@@ -16,32 +16,140 @@ td {
 
 </style>
 
-### CSCI 345 - Netowrk Security
+### CSCI 345 - Network Security
 
-Class Schedule
+*[Class Website](http://mountrouidoux.people.cofc.edu/CSCI345/index.html)*
 
+Class Assignment Schedule
 
 <table>
   <tr>
-    <td>Assignment</td>
-    <td>Details</td>
-    <td>Type</td>
+    <td>Assignment</td> 
+    <td>Details</td> <!--Description of the assignment-->
+    <td>Type</td> <!--HW/Lab/Quiz/Test/Project/Other-->
+    <td>File</td> <!--Anchor w/ link to file & type of file-->
+    <td>Assign date</td>
     <td>Due date</td>
   </tr>
   <tr>
-    <td>d</td>
-    <td>e</td>
-    <td>f</td>
+    <td>Homework 0</td>
+    <td>Set up virtual machine<br/>Create GENI NCSA account<br/>Follow HW instructions</td>
+    <td>HW</td>
+    <td><a href="./Homework/HW0_S20.pdf">PDF</a></td>
+    <td>Jan 09</td>
+    <td>N/A</td>
   </tr>
   <tr>
-    <td>d</td>
-    <td>e</td>
-    <td>f</td>
+    <td>Lab 1</td>
+    <td>Command Line</td>
+    <td>Lab</td>
+    <td><a href="./Labs/Lab1_Unix.pdf">PDF</a></td>
+    <td>Jan 09</td>
+    <td>Jan 16</td>
   </tr>
   <tr>
-    <td>d</td>
-    <td>e</td>
-    <td>f</td>
+    <td>Lab 2</td>
+    <td>Password Tools</td>
+    <td>Lab</td>
+    <td><a href="./Labs/Lab2_Passwd.pdf">PDF</a></td>
+    <td>Jan 16</td>
+    <td>IDK</td>
+  </tr>
+  <tr>
+    <td>Lab 3</td>
+    <td>Crypto Tools</td>
+    <td>Lab</td>
+    <td><a href="./Labs/Lab3_Crypto.pdf">PDF</a></td>
+    <td>Jan 30</td>
+    <td>IDK</td>
+  </tr>
+  <tr>
+    <td>Homework 1</td>
+    <td>Crypto and Passwords</td>
+    <td>HW</td>
+    <td><a href="./Homework/HW1_S20.pdf">PDF</a></td>
+    <td>NYA</td>
+    <td>Feb 04</td>
+  </tr>
+  <tr>
+    <td>Lab 4</td>
+    <td>Wireshark</td>
+    <td>Lab</td>
+    <td><a href="./Labs/Lab4_Wireshark_S19.pdf">PDF</a></td>
+    <td>Feb 13</td>
+    <td>IDK</td>
+  </tr>
+  <tr>
+    <td>Homework 2</td>
+    <td>injection, XSS,<br/>GENI TCP/IP stack</td>
+    <td>HW</td>
+    <td><a href="./Homework/HW2_S20.pdf">PDF</a></td>
+    <td>NYA</td>
+    <td>Feb 18</td>
+  </tr>
+  <tr>
+    <td>Lab 5</td>
+    <td>Web app exploits</td>
+    <td>Lab</td>
+    <td><a href="./Labs/Lab6_5_WebAppExploits.pdf">PDF</a></td>
+    <td>Mar 05</td>
+    <td>IDK</td>
+  </tr>
+  <tr>
+    <td>Homework 3</td>
+    <td>GENI DNS spoofing,<br/>DDoS & Snort</td>
+    <td>HW</td>
+    <td>?</td>
+    <td>NYA</td>
+    <td>Mar 10</td>
+  </tr>
+  <tr>
+    <td>NCL</td>
+    <td>Registration Deadline</td>
+    <td>Project</td>
+    <td></td>
+    <td>N/A</td>
+    <td>Mar 20</td>
+  </tr>
+  <tr>
+    <td>NCL</td>
+    <td>Mandatory Preseason</td>
+    <td>Project</td>
+    <td></td>
+    <td>Mar 23</td>
+    <td>Mar 30</td>
+  </tr>
+  <tr>
+    <td>Lab 6</td>
+    <td>Penetration Testing</td>
+    <td>Lab</td>
+    <td>?</td>
+    <td>Mar 31</td>
+    <td>IDK</td>
+  </tr>
+  <tr>
+    <td>NCL</td>
+    <td>Mandatory Individual Game</td>
+    <td>Project</td>
+    <td></td>
+    <td>Apr 03</td>
+    <td>Apr 05</td>
+  </tr>
+  <tr>
+    <td>Homework 4</td>
+    <td>Buffer Overflow</td>
+    <td>HW</td>
+    <td>?</td>
+    <td>NYA</td>
+    <td>Apr 02</td>
+  </tr>
+  <tr>
+    <td><strong>FINAL EXAM</strong></td>
+    <td></td>
+    <td>Final</td>
+    <td></td>
+    <td></td>
+    <td>Apr 28</td>
   </tr>
 </table>
 
