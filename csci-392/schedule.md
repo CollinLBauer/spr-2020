@@ -70,7 +70,7 @@ Class Assignment Schedule
   </tr>
   <tr>
     <td><strong>FINAL EXAM</strong></td>
-    <td></td>
+    <td>Paper is also due</td>
     <td>Final</td>
     <td></td>
     <td></td>
