@@ -69,3 +69,26 @@ CSCI 392 - Ethics in Computing
     An ethical company would keep this information as anonymous as possible and inform users just how much information is collected and how it is used. This is typically explained in the terms of use agreement but important parts should be highlighted somewhere in the UI. It could even have an opt-out system for users who do not want their data collected, or even a way to have personal data already collected removed from their database.
 
     Of course, one could argue that the app could have been designed to not collect personal data at all, but in the current mobile landscape, this would not have been a very marketable decision.
+
+<br/>
+
+### Q 2.1
+#### What sorts of things can excellent software engineers contribute to the good life?
+
+    Software engineers have a unique skillset to design, create, and maintain software whcih can be applied to almost any corner of life, be it business, medical, education, recreation, or really, anything with a computer chip anywhere. Software is also a powerful tool that can affect our lives in ways both seen and unseen, big and small. The potential impact a piece of software can have is tremendous!
+
+    For some obvious examples...
+    - Smart phones have accelerated our communication with each other and with the world, by providing thousands of useful tools with phone calls, music, live videos, and the internet, all compacted down in our pocket.
+    - Amazon and other shopping services have changed how we 
+
+    Looking at the above examples, they all have obvious up sides, but they also came with negatives of varying degrees.
+    - Smart phones are constantly criticized for sucking our lives from the real world to the digital one, potenitally damaging our social lives, vision, productivity, and invasion of our privacy.
+    - Amazon has drasticlly reduced the use of physical stores and led to the closing of many business and losses of thousands of jobs. The are also criticized for their warehouse working conditions, and their workers are known to go on strike.
+
+    To contribute to the "good life" as a software engineer means to maximize the positives of the tools we create, while also mitigating the negatives that they may come with. Smart phone designers have done so with the introduction of features such as the digital wellbeing and the blue light filter.
+
+
+
+---
+
+[Moral machine results](http://moralmachine.mit.edu/results/746195877)
