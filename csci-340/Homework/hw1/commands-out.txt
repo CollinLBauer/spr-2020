@@ -8,7 +8,7 @@ I plan to do most coding from my Linux laptop, but test sensitive code on the VM
 
 The following output is from my Linux laptop.
 
-
+1)
 ====uname output====
 Linux femix-Aspire-A314-21 5.0.0-37-generic #40~18.04.1-Ubuntu SMP Thu Nov 14 12:06:39 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
 
@@ -177,8 +177,21 @@ ps (short for processes) outputs a list of currently running processes.
   -al combines the functionality of both above arguments.
 
 
+2)
 ====Git status output====
 On branch master
 Your branch is up to date with 'origin/master'.
 
 nothing to commit, working tree clean
+
+
+3)
+femix@femix-Aspire-A314-21:~/Desktop/Coding/Projects/Active/College/spr-2020/csci-340/Homework/hw1$ ./hw1 p1 p2 p3
+argc: 4
+
+0: 0x7ffe39c753d8
+1: 0x7ffe39c753e0
+2: 0x7ffe39c753e8
+3: 0x7ffe39c753f0
+
+Done.
