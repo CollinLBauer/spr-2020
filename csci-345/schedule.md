@@ -50,7 +50,7 @@ Class Assignment Schedule
     <td>Lab 2</td>
     <td>Password Tools</td>
     <td>Lab</td>
-    <td><a href="./Labs/Lab2_Passwd.pdf">PDF</a></td>
+    <td><a href="./Labs/lab2/Lab2_Passwd.pdf">PDF</a></td>
     <td>Jan 16</td>
     <td>IDK</td>
   </tr>
@@ -58,7 +58,7 @@ Class Assignment Schedule
     <td>Lab 3</td>
     <td>Crypto Tools</td>
     <td>Lab</td>
-    <td><a href="./Labs/Lab3_Crypto.pdf">PDF</a></td>
+    <td><a href="./Labs/lab3/Lab3_Crypto.pdf">PDF</a></td>
     <td>Jan 30</td>
     <td>IDK</td>
   </tr>
@@ -74,7 +74,7 @@ Class Assignment Schedule
     <td>Lab 4</td>
     <td>Wireshark</td>
     <td>Lab</td>
-    <td><a href="./Labs/Lab4_Wireshark_S19.pdf">PDF</a></td>
+    <td><a href="./Labs/lab4/Lab4_Wireshark_S19.pdf">PDF</a></td>
     <td>Feb 13</td>
     <td>IDK</td>
   </tr>
@@ -90,7 +90,7 @@ Class Assignment Schedule
     <td>Lab 5</td>
     <td>Web app exploits</td>
     <td>Lab</td>
-    <td><a href="./Labs/Lab6_5_WebAppExploits.pdf">PDF</a></td>
+    <td><a href="./Labs/lab5/Lab6_5_WebAppExploits.pdf">PDF</a></td>
     <td>Mar 05</td>
     <td>IDK</td>
   </tr>
