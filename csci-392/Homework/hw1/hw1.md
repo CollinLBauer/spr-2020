@@ -87,6 +87,23 @@ CSCI 392 - Ethics in Computing
 
     To contribute to the "good life" as a software engineer means to maximize the positives of the tools we create, while also mitigating the negatives that they may come with. Smart phone designers have done so with the introduction of features such as the digital wellbeing and the blue light filter.
 
+<br/>
+
+### Q 2.2
+#### What kinds of character traits, qualities, behaviors and/or habits do you think mark the kinds of people who tend to contribute most in these ways?
+
+    People who tend to contribute to this "good life" tend to be a mix of kind, idealistic, pragmatic, and have a good understanding of the world in some way, such as science, environmentalism, and humanitarianism. This mix of knowledge and awareness often leads to active projects in the open source community, where others may add their own ideas and implementations to the projects.
+
+<br/>
+
+### Q 3.1
+#### Who are the various stakeholders in this scenario, and what do they each have at stake in your action? Reflect carefully and deeply, and answer as fully as possible.
+
+    Stakeholders include:
+    - the startup company
+    - law enforcement
+    - large corporations
+    - foreign government
 
 
 ---
