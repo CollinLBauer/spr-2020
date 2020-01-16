@@ -3,17 +3,16 @@ table {
   border: 3px solid #000;
 }
 tr {
-    border-bottom: 2px solid #123;
-    background: #234
+  border-bottom: 2px solid #123;
+  background: #234
 }
 tr:first-child {
-    border-bottom: 4px solid #123;
-    font-weight:bold;
+  border-bottom: 4px solid #123;
+  font-weight:bold;
 }
 td {
   border-left: 1px solid #000;
 }
-
 </style>
 
 ### CSCI 345 - Network Security
