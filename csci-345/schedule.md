@@ -43,7 +43,7 @@ Class Assignment Schedule
     <td>Lab 1</td>
     <td>Command Line</td>
     <td>Lab</td>
-    <td><a href="./Labs/Lab1_Unix.pdf">PDF</a></td>
+    <td><a href="./Labs/lab1/Lab1_Unix.pdf">PDF</a></td>
     <td>Jan 09</td>
     <td>Jan 16</td>
   </tr>
