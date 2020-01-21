@@ -6,9 +6,15 @@
 #include <memory.h>
 
 
-// Doubly linked list of process IDs
+// Doubly linked list of processes
 struct pidElement {
-    int pid;
+    // element contents
+    int pid;                // process ID
+
+    int AX;                 // register
+    int BX;                 // register
+    
+    // pointers to other elements
     struct pidElement *prev;
     struct pidElement *next;
 
