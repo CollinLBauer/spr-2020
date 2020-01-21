@@ -20,9 +20,25 @@ int main(int argc, char *argv[]){
         return 0;
     }
     
-    int var = atoi(argv[1]);
-    printf("argv[1] <%d>\n", var);
-    //malloc(&argv[1]);
+    int size = atoi(argv[1]);
+    int *stored = malloc(size * sizeof(int));
+//    printf("size <%d>\n", size); //debug
+    printf("stored <%p>\n", stored);
+    
+/*    
+    // print before memset
+    printf("Before memset()\n");
+    for (int i = 0; i < size; i++){
+        printf("stored[%d]: %d\n", i, stored[i]);
+    }
+*/
 
+    memset(stored, 0, size * sizeof(int));
+    for (int i = 0; i < size; i++){
+        printf("stored[%d]: 0x%x\n", i, stored[i]);
+    }
+    
+    free(stored);
+    printf("Done.\n");
     return 0;
 }
