@@ -1,3 +1,16 @@
+Collin Bauer
+
+CSCI 340 - Operating Systems
+
+## Homework 2
+
+---
+
+### Parts 1 and 2
+
+**Code from assignment**
+
+```
 // Collin Bauer
 #include <stdio.h>
 #include <stdlib.h>
@@ -58,3 +71,46 @@ int main(int argc, char *argv[]){
     printf("Done.\n");
     return 0;
 }
+
+```
+
+**Example output**
+
+```
+stored <0x559c2487c260>
+stored[0]: 0x0
+stored[1]: 0x0
+stored[2]: 0x0
+stored[3]: 0x0
+stored[4]: 0x0
+stored[5]: 0x0
+stored[6]: 0x0
+stored[7]: 0x0
+stored[8]: 0x0
+stored[9]: 0x0
+stored[10]: 0x0
+stored[11]: 0x0
+stored[12]: 0x0
+stored[13]: 0x0
+stored[14]: 0x0
+stored[15]: 0x0
+stored[16]: 0x0
+stored[17]: 0x0
+stored[18]: 0x0
+stored[19]: 0x0
+Done.
+```
+
+### Part3 - Process Transitions
+
+**Ready**
+- 
+
+**Suspended**
+- 
+
+**Running**
+- 
+
+
+### Part 4 - Scheduling Policies
