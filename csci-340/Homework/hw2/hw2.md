@@ -104,13 +104,17 @@ Done.
 ### Part3 - Process Transitions
 
 **Ready**
-- 
+- Running
+- Terminated
 
 **Suspended**
-- 
+- Ready
+- Terminated
 
 **Running**
-- 
+- Suspended
+- Terminated
+
 
 
 ### Part 4 - Scheduling Policies
