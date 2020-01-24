@@ -101,20 +101,34 @@ stored[19]: 0x0
 Done.
 ```
 
+---
+
 ### Part3 - Process Transitions
 
 **Ready**
-- Running
-- Terminated
+- Running - If a process is waiting to run, the task scheduler may tell it to start (or continue) running.
+- Suspended - If another process needs to take priority according to the task scheduler, the process may be stored into memory and suspended for the higher priority process.
+- Terminated - A process may be forcibly terminated from any state.
 
 **Suspended**
-- Ready
-- Terminated
+- Ready - If a process is suspended and exists in memory, it may be loaded by the operating system and resume execution at any point. Note that it doesn't immediately go into the "running" state.
+- Terminated - A process may be forcibly terminated from any state.
 
 **Running**
-- Suspended
-- Terminated
+- Suspended - The task scheduler may tell a running process to "suspend" its execution so other processes may take priority; its data is then stored away in memory to be called later.
+- Ready - If a process is sharing CPU usage with others, it may swap between "running" and "ready" states so resources may be shared properly.
+- Terminated - If the process has finished execuiting, it has no reason to exist anymore and may be safely terminated.
 
-
+---
 
 ### Part 4 - Scheduling Policies
+
+***CFS***
+
+The Completely Fair Scheduler (CFS) is an implementation of so-called "fair share" scheduling, where each process gets a proportional percentage of the CPU time. It is extremely efficient (and therefor fast) thanks to clever use of data structures. As more processes are added, it decreases the size of a time slice, so CPU usage spreads out more. However, there is also a minimum time slice size specified (minimum granularity), so the CPU doesn't spend too much time switching processes.
+
+<br/>
+
+***BFS***
+
+The Brain **** Scheduler (BFS) is another fair scheduler that attempts to keep a simple approach to its slice-sharing algorithms. It uses a single queue (structured as adoubly-linked-list) for all processes. In contrast to CFS, all tasks use the same sized time slice, with the exception of realtime tasks of the highest priority, which have "infinite" time slices.
