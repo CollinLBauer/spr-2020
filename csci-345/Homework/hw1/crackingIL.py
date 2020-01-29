@@ -10,8 +10,9 @@ def compareHashes(hashFile, testHash):
     hashFile.seek(0)
 
     for hash in hashFile:
+        hash = hash.strip("\n")
         hashList = hash.split(":")
-        if(hashList[1] == testHash)
+        if(hashList[1] == testHash):
             return True
     return False
 
@@ -37,10 +38,30 @@ def ruleB(inFile):
 def ruleC(inFile,dictPath="/usr/share/dict/words"):
     dict = open(dictPath,"r")
     #TODO
-    dict.close()
-    pass
+    dict.seek(0);
 
-# any word that is made with digits up to 100 digits length
+    for word in dict:
+        word = word.strip("\n")
+        if(len(word) == 5 and ('a' in word or 'A' in word)):
+            word = word.replace('a', '@')
+            word = word.replace('A','@')
+            word = word.replace('l','1')
+            word = word.replace('L','1')
+            hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
+
+            if(compareHashes(inFile, hash)):
+                return word, hash
+            word = word.lower()
+            hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
+
+            if(compareHashes(inFile, hash)):
+                return word, hash
+
+    return "-1", "-1"
+    dict.close()
+
+
+# any word that is made with digits up to 7 digits length
 def ruleD(inFile):
     #TODO
     pass
@@ -54,12 +75,13 @@ def ruleE(inFile,dictPath="/usr/share/dict/words"):
 
 
 def main():
-    if len(argv) <= 1:
+    if len(sys.argv) != 2:
         print("Argument expected.")
         return
 
-    hashFile = open(argv[1],"r")
-    result = ruleA(hashFile)
+    hashFile = open(sys.argv[1],"r")
+    password, hash = ruleC(hashFile)
+    print("password: " + password + "\nhash: " + hash)
 
 
 
