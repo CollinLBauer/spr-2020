@@ -21,9 +21,20 @@ def compareHashes(hashFile, testHash):
 # capitalized and a 1-digit number appended
 def ruleA(inFile,dictPath="/usr/share/dict/words"):
     dict = open(dictPath,"r")
-    #TODO
+
+    for word in dict:
+        word = word.strip("\n")
+        if(len(word) == 7):
+            word = word.capitalize()
+            for i in range(10):
+                temp = word + str(i)
+                hash = hashlib.sha256(temp.encode("utf-8")).hexdigest()
+                if compareHashes(inFile,hash):
+                    dict.close()
+                    return temp, hash
+
     dict.close()
-    pass
+    return "-1", "-1"
 
 # a five digit password with at least one of the following special
 # characters in the beginning: *,~,!,#
@@ -85,6 +96,7 @@ def ruleC(inFile,dictPath="/usr/share/dict/words"):
 
             ## This if statement only checks for uppercase passwords
             if(compareHashes(inFile, hash)):
+                dict.close()
                 return word, hash
 
             ## Need to lowercase words to check for that instance
@@ -93,11 +105,12 @@ def ruleC(inFile,dictPath="/usr/share/dict/words"):
 
             ## This if statement only checks for lowercase passwords
             if(compareHashes(inFile, hash)):
+                dict.close()
                 return word, hash
 
     ## If no matches are found, return values of -1, for main to manage
-    return "-1", "-1"
     dict.close()
+    return "-1", "-1"
 
 
 # any word that is made with digits up to 7 digits length
@@ -157,13 +170,16 @@ def ruleE(inFile,dictPath="/usr/share/dict/words"):
         word = word.strip("\n")
         hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
         if(compareHashes(inFile, hash)):
+            dict.close()
             return word, hash
         ## Capitalize word if no lowercase.
         word = word.capitalize()
         hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
         if(compareHashes(inFile, hash)):
+            dict.close()
             return word, hash
     ## If the hash is not found, then return -1, -1
+    dict.close()
     return "-1", "-1"
 
     dict.close()
@@ -176,9 +192,11 @@ def main():
         print("One argument expected.")
         return
 
+
     hashFile = open(args[1],"r")
-    ##word, hash = ruleA(hashFile)
-    ##print(word + "    " + hash)
+    print("ruleA")
+    word, hash = ruleA(hashFile)
+    print(word + "    " + hash)
     print("ruleB")
     word, hash = ruleB(hashFile)
     print(word + "    " + hash)
