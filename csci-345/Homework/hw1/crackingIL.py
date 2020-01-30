@@ -58,7 +58,7 @@ def ruleC(inFile,dictPath="/usr/share/dict/words"):
                 return word, hash
 
             ## Need to lowercase words to check for that instance
-            word = word.lower()
+            word = word.capitalize()
             hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
 
             ## This if statement only checks for lowercase passwords
@@ -72,43 +72,70 @@ def ruleC(inFile,dictPath="/usr/share/dict/words"):
 
 # any word that is made with digits up to 7 digits length
 def ruleD(inFile):
+    ## Need to use a range of 10000000 becuase the upper bound is not included
     for x in range(10000000):
+        ## Format is nessecary to check for leading zeroes
+        ## Checks for a single digit number
         word = "{:01}".format(x)
         hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
         if(compareHashes(inFile, hash)):
             return word, hash
+        ## Checks for double digit number
         word = "{:02}".format(x)
         hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
         if(compareHashes(inFile, hash)):
             return word, hash
+        ## Checks for triple digit number
         word = "{:03}".format(x)
         hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
         if(compareHashes(inFile, hash)):
             return word, hash
+        ## Checks for quadruple digit number
         word = "{:04}".format(x)
         hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
         if(compareHashes(inFile, hash)):
             return word, hash
+        ## Checks for quintuple digit number
         word = "{:05}".format(x)
         hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
         if(compareHashes(inFile, hash)):
             return word, hash
+        ## Checks for sextuple digit number
         word = "{:06}".format(x)
         hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
         if(compareHashes(inFile, hash)):
             return word, hash
+        ## Checks for octuple digit number
         word = "{:07}".format(x)
         hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
         if(compareHashes(inFile, hash)):
             return word, hash
+    ## If no password to hash is found return -1, -1
     return "-1", "-1"
 
 # any number of chars single word from /usr/share/dict/words
 def ruleE(inFile,dictPath="/usr/share/dict/words"):
     dict = open(dictPath,"r")
-    #TODO
+
+    dict.seek(0);
+
+    ## This is a simple dictionary search.
+    ## Hash each word in the dictionary list and compare to given hashes.
+    ## If the hash does not match, check the hashed capitalized word.
+    for word in dict:
+        word = word.strip("\n")
+        hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
+        if(compareHashes(inFile, hash)):
+            return word, hash
+        ## Capitalize word if no lowercase.
+        word = word.capitalize()
+        hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
+        if(compareHashes(inFile, hash)):
+            return word, hash
+    ## If the hash is not found, then return -1, -1
+    return "-1", "-1"
+
     dict.close()
-    pass
 
 
 def main():
@@ -117,7 +144,7 @@ def main():
         return
 
     hashFile = open(sys.argv[1],"r")
-    password, hash = ruleD(hashFile)
+    password, hash = ruleC(hashFile)
     print("password: " + password + "\nhash: " + hash)
 
 
