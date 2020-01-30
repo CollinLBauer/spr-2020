@@ -10,7 +10,6 @@ def compareHashes(hashFile, testHash):
     hashFile.seek(0)
 
     for hash in hashFile:
-        hash = hash.strip("\n")
         hashList = hash.split(":")
         if(hashList[1] == testHash):
             return True
@@ -26,11 +25,42 @@ def ruleA(inFile,dictPath="/usr/share/dict/words"):
     dict.close()
     pass
 
-# a ten digit password with at least one of the following special
+# a five digit password with at least one of the following special
 # characters in the beginning: *,~,!,#
 def ruleB(inFile):
-    #TODO
-    pass
+    spec = ["*","~","!","#"]
+    for i in spec:
+        for num in range(10000): # 1 special character, 4 numbers
+            word = "{}{:04}".format(i,num)
+            hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
+            if compareHashes(inFile,hash):
+                return word, hash
+        for j in spec:
+            for num in range(1000): # 2 special characters, 3 numbers
+                word = "{}{}{:03}".format(i,j,num)
+                hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
+                if compareHashes(inFile,hash):
+                    return word, hash
+            for k in spec:
+                for num in range(100): # 3 special characters, 2 numbers
+                    word = "{}{}{}{:02}".format(i,j,k,num)
+                    hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
+                    if compareHashes(inFile,hash):
+                        return word, hash
+                for l in spec:
+                    for num in range(10): # 4 special characters, 1 number
+                        word = "{}{}{}{}{:01}".format(i,j,k,l,num)
+                        hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
+                        if compareHashes(inFile,hash):
+                            return word, hash
+                    for m in spec: # 5 special characters
+                        word = "{}{}{}{}{}".format(i,j,k,l,m)
+                        hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
+                        if compareHashes(inFile,hash):
+                            return word, hash
+
+
+    return "-1", "-1"
 
 # a five char word from /usr/share/dict/words witht he letter 'a' in it which
 # gets replaced with the special character '@' and the character 'l' which is
@@ -113,6 +143,7 @@ def ruleD(inFile):
     ## If no password to hash is found return -1, -1
     return "-1", "-1"
 
+
 # any number of chars single word from /usr/share/dict/words
 def ruleE(inFile,dictPath="/usr/share/dict/words"):
     dict = open(dictPath,"r")
@@ -138,14 +169,28 @@ def ruleE(inFile,dictPath="/usr/share/dict/words"):
     dict.close()
 
 
+
 def main():
-    if len(sys.argv) != 2:
-        print("Argument expected.")
+    args = sys.argv
+    if len(args) != 2:
+        print("One argument expected.")
         return
 
-    hashFile = open(sys.argv[1],"r")
-    password, hash = ruleC(hashFile)
-    print("password: " + password + "\nhash: " + hash)
+    hashFile = open(args[1],"r")
+    ##word, hash = ruleA(hashFile)
+    ##print(word + "    " + hash)
+    print("ruleB")
+    word, hash = ruleB(hashFile)
+    print(word + "    " + hash)
+    print("ruleC")
+    word, hash = ruleC(hashFile)
+    print(word + "    " + hash)
+    print("RuleD")
+    word, hash = ruleD(hashFile)
+    print(word + "    " + hash)
+    print("RuleE")
+    word, hash = ruleE(hashFile)
+    print(word + "    " + hash)
 
 
 

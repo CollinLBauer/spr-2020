@@ -1,1 +1,5 @@
-user:fd479093306572e9a230caaafbf8d975b129909199befcb3c35b8c35dc29c2f4
+userB:fffa82a5a58ee159d476e8c63f45a553848072df2f102f494e27f50d30295ac6:~~012
+userA:84b175349a3d5a8bcabda1ab8eb84e3c36139f27e3a04b17b47c497a3b577940:20:HomerSimpson:/home/homer:/bin/tcsh:Puzzles4
+userC:e77599c90db264dbe4b449565a03b5a26c989e975089fcc7dc3c55a720928e66:353:LisaSimpson:/home/lisa:/bin/tcsh:be@ch
+userD:bf6aaaab7c143ca12ae448c69fb72bb4cf1b29154b9086a927a0a91ae334cdf7:012
+userE:ab2620f9b7154d9f9dc1b3c2d949d85d595fe77f45411b3dbe6e5b47da564177:42:20:MaggieSimpson:/home/maggie:/bin/tcsh:programming
