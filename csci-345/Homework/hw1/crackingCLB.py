@@ -27,12 +27,37 @@ def ruleA(inFile,dictPath="/usr/share/dict/words"):
 # a five digit password with at least one of the following special
 # characters in the beginning: *,~,!,#
 def ruleB(inFile):
-    for i in ["*","~","!","#"]:
-        for j in range(100000):
-            word = "{}{:05}".format(i,j)
+    spec = ["*","~","!","#"]
+    for i in spec:
+        for num in range(10000): # 1 special character, 4 numbers
+            word = "{}{:05}".format(i,num)
             hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
             if compareHashes(inFile,hash):
                 return word, hash
+        for j in spec:
+            for num in range(1000): # 2 special characters, 3 numbers
+                word = "{}{}{:05}".format(i,j,num)
+                hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
+                if compareHashes(inFile,hash):
+                    return word, hash
+            for k in spec:
+                for num in range(100): # 3 special characters, 2 numbers
+                    word = "{}{}{}{:05}".format(i,j,k,num)
+                    hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
+                    if compareHashes(inFile,hash):
+                        return word, hash
+                for l in spec:
+                    for num in range(10): # 4 special characters, 1 number
+                        word = "{}{}{}{}{:05}".format(i,j,k,l,num)
+                        hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
+                        if compareHashes(inFile,hash):
+                            return word, hash
+                    for m in spec: # 5 special characters
+                        word = "{}{}{}{}{}".format(i,j,k,l,m)
+                        hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
+                        if compareHashes(inFile,hash):
+                            return word, hash
+
 
     return -1, -1
 
