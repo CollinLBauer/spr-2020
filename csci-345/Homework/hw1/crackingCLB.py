@@ -13,11 +13,10 @@ def compareHashes(passCount, hashFile, testWord):
 
     for hash in hashFile:
         hash = hash.strip("\n")
-        #passCount = hash.split(":")
-        #if(passCount[1] == testHash):
-        if hash == testHash:
+        hashList = hash.split(":")
+        if(hashList[1] == testHash):
             passCount += 1
-            print("{} <{}>".format(testWord, hash))
+            print("{}: {} <{}>".format(hashList[0], testWord, hashList[1]))
 
     return passCount
 
