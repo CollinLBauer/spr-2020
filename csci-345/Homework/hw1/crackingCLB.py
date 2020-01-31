@@ -6,39 +6,44 @@ import sys
 
 # helper method
 # uses regular expressions to search for a submitted hash
-def compareHashes(hashFile, testHash):
+def compareHashes(passCount, hashFile, testWord):
+    #reset hash file pointer & hash word
     hashFile.seek(0)
+    testHash = hashlib.sha256(testWord.encode("utf-8")).hexdigest()
 
     for hash in hashFile:
         hash = hash.strip("\n")
-        #hashList = hash.split(":")
-        #if(hashList[1] == testHash):
-        #    return True
-        if hash == testHash:
-            return True
-    return False
+        hashList = hash.split(":")
+        if(hashList[1] == testHash):
+            passCount += 1
+            print("{}: {} <{}>".format(hashList[0], testWord, hashList[1]))
+
+    return passCount
 
 # a seven char word from /usr/share/dict/words which gets the first letter
 # capitalized and a 1-digit number appended
-def ruleA(inFile,dictPath="/usr/share/dict/words"):
+def ruleA(passCount, inFile, hashCount, dictPath="/usr/share/dict/words"):
     dict = open(dictPath,"r")
     
     for word in dict:
-        word = word.strip("\n").capitalize()
-        for i in range(10):
-            temp = word + str(i)
-            hash = hashlib.sha256(temp.encode("utf-8")).hexdigest()
-            print("{} <{}>".format(temp,hash))
-            if compareHashes(inFile,hash):
-                dict.close()
-                return temp, hash
+        word = word.strip("\n")
+        if len(word) == 7:
+            for i in range(10):
+                temp = word.capitalize() + str(i)
+                passCount = compareHashes(passCount, inFile, temp)
+                #print(passCount)
+                if passCount == hashCount:
+                    print("Exiting early.")
+                    dict.close()
+                    return passCount
 
     dict.close()
-    return "-1", "-1"
+    return passCount
 
+'''
 # a five digit password with at least one of the following special
 # characters in the beginning: *,~,!,#
-def ruleB(inFile):
+def ruleB(passCount, inFile):
     spec = ["*","~","!","#"]
     for i in spec:
         for num in range(10000): # 1 special character, 4 numbers
@@ -70,16 +75,13 @@ def ruleB(inFile):
                         if compareHashes(inFile,hash):
                             return word, hash
 
-
     return "-1", "-1"
 
 # a five char word from /usr/share/dict/words witht he letter 'a' in it which
 # gets replaced with the special character '@' and the character 'l' which is
 # substituted with th number '1'
-def ruleC(inFile,dictPath="/usr/share/dict/words"):
+def ruleC(passCount, inFile,dictPath="/usr/share/dict/words"):
     dict = open(dictPath,"r")
-    #TODO
-    dict.seek(0);
 
     for word in dict:
         ## Remove new line character, so that it really checks for words that are length 5
@@ -96,6 +98,7 @@ def ruleC(inFile,dictPath="/usr/share/dict/words"):
 
             ## This if statement only checks for uppercase passwords
             if(compareHashes(inFile, hash)):
+                dict.close()
                 return word, hash
 
             ## Need to lowercase words to check for that instance
@@ -104,15 +107,16 @@ def ruleC(inFile,dictPath="/usr/share/dict/words"):
 
             ## This if statement only checks for lowercase passwords
             if(compareHashes(inFile, hash)):
+                dict.close()
                 return word, hash
 
     ## If no matches are found, return values of -1, for main to manage
-    return "-1", "-1"
     dict.close()
+    return "-1", "-1"
 
 
 # any word that is made with digits up to 7 digits length
-def ruleD(inFile):
+def ruleD(passCount, inFile):
     ## Need to use a range of 10000000 becuase the upper bound is not included
     for x in range(10000000):
         ## Format is nessecary to check for leading zeroes
@@ -156,10 +160,8 @@ def ruleD(inFile):
 
 
 # any number of chars single word from /usr/share/dict/words
-def ruleE(inFile,dictPath="/usr/share/dict/words"):
+def ruleE(passCount, inFile,dictPath="/usr/share/dict/words"):
     dict = open(dictPath,"r")
-
-    dict.seek(0);
 
     ## This is a simple dictionary search.
     ## Hash each word in the dictionary list and compare to given hashes.
@@ -168,29 +170,53 @@ def ruleE(inFile,dictPath="/usr/share/dict/words"):
         word = word.strip("\n")
         hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
         if(compareHashes(inFile, hash)):
+            dict.close()
             return word, hash
         ## Capitalize word if no lowercase.
         word = word.capitalize()
         hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
         if(compareHashes(inFile, hash)):
+            dict.close()
             return word, hash
-    ## If the hash is not found, then return -1, -1
-    return "-1", "-1"
 
+    ## If the hash is not found, then return -1, -1
     dict.close()
+    return "-1", "-1"
+'''
 
 def main():
+    # check to see if arguments are valid
     args = sys.argv
     if len(args) != 2:
-        print("Argument expected.")
+        print("Expected one argument and received {}.".format(len(args)-1))
         return
 
+    # open file and check length
     hashFile = open(args[1],"r")
+    hashCount = 0
+    for line in hashFile:
+        hashCount += 1
+    hashFile.seek(0)
+    
+    passCount = 0
 
-    word, hash = ruleA(hashFile)
-    print("Word: " + word)
-    print("Hash: " + hash)
+    passCount = ruleA(passCount, hashFile, hashCount)
+    '''
+    if passCount < hashCount:
+        ruleB()
+    if passCount < hashCount:
+        ruleC()
+    if passCount < hashCount:
+        ruleD()
+    if passCount < hashCount:
+        ruleE()
+    '''
+    if passCount < hashCount:
+        print("{} hashes not found.".format(hashCount - passCount))
 
+
+    # close file
     hashFile.close()
+    print("Done.")
 
 main()
