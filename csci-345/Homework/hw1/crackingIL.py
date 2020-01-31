@@ -4,11 +4,14 @@ import os
 import threading
 import sys
 
+global seekLoc
+
 # helper method
 # uses regular expressions to search for a submitted hash
 def compareHashes(hashFile, testHash):
-    hashFile.seek(0)
-
+    global seekLoc
+    hashFile.seek(seekLoc)
+    seekLoc+=1
     for hash in hashFile:
         hashList = hash.split(":")
         if(hashList[1] == testHash):
@@ -19,8 +22,9 @@ def compareHashes(hashFile, testHash):
 
 # a seven char word from /usr/share/dict/words which gets the first letter
 # capitalized and a 1-digit number appended
-def ruleA(inFile,dictPath="/usr/share/dict/words"):
+def ruleA(inFile,seekLoc,dictPath="/usr/share/dict/words"):
     dict = open(dictPath,"r")
+    word = 0
 
     for word in dict:
         word = word.strip("\n")
@@ -44,7 +48,7 @@ def ruleB(inFile):
         for num in range(10000): # 1 special character, 4 numbers
             word = "{}{:04}".format(i,num)
             hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
-            if compareHashes(inFile,hash):
+            if compareHashes(inFile, hash):
                 return word, hash
         for j in spec:
             for num in range(1000): # 2 special characters, 3 numbers
@@ -158,7 +162,7 @@ def ruleD(inFile):
 
 
 # any number of chars single word from /usr/share/dict/words
-def ruleE(inFile,dictPath="/usr/share/dict/words"):
+def ruleE(inFile, dictPath="/usr/share/dict/words"):
     dict = open(dictPath,"r")
 
     dict.seek(0);
@@ -187,30 +191,58 @@ def ruleE(inFile,dictPath="/usr/share/dict/words"):
 
 
 def main():
+    global seekLoc
     args = sys.argv
     if len(args) != 2:
         print("One argument expected.")
         return
 
-
+    solved = []
+    word = ""
     hashFile = open(args[1],"r")
-    print("ruleA")
-    word, hash = ruleA(hashFile)
-    print(word + "    " + hash)
-    print("ruleB")
-    word, hash = ruleB(hashFile)
-    print(word + "    " + hash)
-    print("ruleC")
-    word, hash = ruleC(hashFile)
-    print(word + "    " + hash)
-    print("RuleD")
-    word, hash = ruleD(hashFile)
-    print(word + "    " + hash)
-    print("RuleE")
-    word, hash = ruleE(hashFile)
-    print(word + "    " + hash)
+    count = len(hashFile.readlines())
+    print(count)
+    while(len(solved) < (2*count)):
+        seekLoc = 0
+        while(word != "-1"):
+            word, hash = ruleB(hashFile)
+            if(word != "-1"):
+                solved.append(hash)
+                solved.append(word)
+        print(len(solved))
+        seekLoc = 0
+        word = ""
+        print("B")
+        while(word != "-1"):
+            word, hash = ruleC(hashFile)
+            solved.append(hash)
+            solved.append(word)
+        print(len(solved))
+        word = ""
+        seekLoc = 0
+        while(word != "-1"):
+            word, hash = ruleA(hashFile)
+            solved.append(hash)
+            solved.append(word)
+        print(len(solved))
+        word = ""
+        seekLoc = 0
+        while(word != "-1"):
+            word, hash = ruleE(hashFile)
+            solved.append(hash)
+            solved.append(word)
+        print(len(solved))
+        word = ""
+        seekLoc = 0
+        while(word != "-1"):
+            word, hash = ruleD(hashFile)
+            solved.append(hash)
+            solved.append(word)
+        print(len(solved))
+    for i in range (len(solved)):
+        print(solved[i])
 
-
+    hashFile.close()
 
 
 
