@@ -110,11 +110,10 @@ def ruleC(passCount, inFile, hashCount, dictPath="/usr/share/dict/words"):
                 dict.close()
                 return passCount
 
-    ## If no matches are found, return values of -1, for main to manage
     dict.close()
     return passCount
 
-'''
+
 # any word that is made with digits up to 7 digits length
 def ruleD(passCount, inFile, hashCount):
     ## Need to use a range of 10000000 becuase the upper bound is not included
@@ -122,45 +121,44 @@ def ruleD(passCount, inFile, hashCount):
         ## Format is nessecary to check for leading zeroes
         ## Checks for a single digit number
         word = "{:01}".format(x)
-        hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
-        if(compareHashes(inFile, hash)):
-            return word, hash
+        passCount = compareHashes(passCount, inFile, word)
+        if passCount == hashCount:
+            return passCount
         ## Checks for double digit number
         word = "{:02}".format(x)
-        hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
-        if(compareHashes(inFile, hash)):
-            return word, hash
+        passCount = compareHashes(passCount, inFile, word)
+        if passCount == hashCount:
+            return passCount
         ## Checks for triple digit number
         word = "{:03}".format(x)
-        hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
-        if(compareHashes(inFile, hash)):
-            return word, hash
+        passCount = compareHashes(passCount, inFile, word)
+        if passCount == hashCount:
+            return passCount
         ## Checks for quadruple digit number
         word = "{:04}".format(x)
-        hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
-        if(compareHashes(inFile, hash)):
-            return word, hash
+        passCount = compareHashes(passCount, inFile, word)
+        if passCount == hashCount:
+            return passCount
         ## Checks for quintuple digit number
         word = "{:05}".format(x)
-        hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
-        if(compareHashes(inFile, hash)):
-            return word, hash
+        passCount = compareHashes(passCount, inFile, word)
+        if passCount == hashCount:
+            return passCount
         ## Checks for sextuple digit number
         word = "{:06}".format(x)
-        hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
-        if(compareHashes(inFile, hash)):
-            return word, hash
+        passCount = compareHashes(passCount, inFile, word)
+        if passCount == hashCount:
+            return passCount
         ## Checks for octuple digit number
         word = "{:07}".format(x)
-        hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
-        if(compareHashes(inFile, hash)):
-            return word, hash
-    ## If no password to hash is found return -1, -1
-    return "-1", "-1"
+        passCount = compareHashes(passCount, inFile, word)
+        if passCount == hashCount:
+            return passCount
+    return passCount
 
 
 # any number of chars single word from /usr/share/dict/words
-def ruleE(passCount, inFile,dictPath="/usr/share/dict/words"):
+def ruleE(passCount, inFile, hashCount, dictPath="/usr/share/dict/words"):
     dict = open(dictPath,"r")
 
     ## This is a simple dictionary search.
@@ -168,21 +166,20 @@ def ruleE(passCount, inFile,dictPath="/usr/share/dict/words"):
     ## If the hash does not match, check the hashed capitalized word.
     for word in dict:
         word = word.strip("\n")
-        hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
-        if(compareHashes(inFile, hash)):
+        passCount = compareHashes(passCount, inFile, word)
+        if passCount == hashCount:
             dict.close()
-            return word, hash
+            return passCount
         ## Capitalize word if no lowercase.
         word = word.capitalize()
-        hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
-        if(compareHashes(inFile, hash)):
+        passCount = compareHashes(passCount, inFile, word)
+        if passCount == hashCount:
             dict.close()
-            return word, hash
+            return passCount
 
-    ## If the hash is not found, then return -1, -1
     dict.close()
-    return "-1", "-1"
-'''
+    return passCount
+
 
 def main():
     # check to see if arguments are valid
@@ -200,18 +197,21 @@ def main():
 
     passCount = 0
 
-    passCount = ruleA(passCount, hashFile, hashCount)
-    if passCount < hashCount:
-        passCount = ruleB(passCount, hashFile, hashCount)
+    passCount = ruleB(passCount, hashFile, hashCount)
 
     if passCount < hashCount:
         passCount = ruleC(passCount, hashFile, hashCount)
-    '''
+
     if passCount < hashCount:
-        ruleD()
+        passCount = ruleA(passCount, hashFile, hashCount)
+
     if passCount < hashCount:
-        ruleE()
-    '''
+        passCount = ruleE(passCount, hashFile, hashCount)
+
+    if passCount < hashCount:
+        passCount = ruleD(passCount, hashFile, hashCount)
+
+
     if passCount < hashCount:
         print("{} hashes not found.".format(hashCount - passCount))
 
