@@ -33,50 +33,50 @@ def ruleA(passCount, inFile, hashCount, dictPath="/usr/share/dict/words"):
                 passCount = compareHashes(passCount, inFile, temp)
                 #print(passCount)
                 if passCount == hashCount:
-                    print("Exiting early.")
                     dict.close()
                     return passCount
 
     dict.close()
     return passCount
 
-'''
+
 # a five digit password with at least one of the following special
 # characters in the beginning: *,~,!,#
-def ruleB(passCount, inFile):
+def ruleB(passCount, inFile, hashCount):
     spec = ["*","~","!","#"]
     for i in spec:
         for num in range(10000): # 1 special character, 4 numbers
             word = "{}{:04}".format(i,num)
-            hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
-            if compareHashes(inFile,hash):
-                return word, hash
+            passCount = compareHashes(passCount, inFile, word)
+            if passCount == hashCount:
+                    return passCount
         for j in spec:
             for num in range(1000): # 2 special characters, 3 numbers
                 word = "{}{}{:03}".format(i,j,num)
-                hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
-                if compareHashes(inFile,hash):
-                    return word, hash
+                passCount = compareHashes(passCount, inFile, word)
+                if passCount == hashCount:
+                    return passCount
             for k in spec:
                 for num in range(100): # 3 special characters, 2 numbers
                     word = "{}{}{}{:02}".format(i,j,k,num)
-                    hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
-                    if compareHashes(inFile,hash):
-                        return word, hash
+                    passCount = compareHashes(passCount, inFile, word)
+                    if passCount == hashCount:
+                        return passCount
                 for l in spec:
                     for num in range(10): # 4 special characters, 1 number
                         word = "{}{}{}{}{:01}".format(i,j,k,l,num)
-                        hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
-                        if compareHashes(inFile,hash):
-                            return word, hash
+                        passCount = compareHashes(passCount, inFile, word)
+                        if passCount == hashCount:
+                            return passCount
                     for m in spec: # 5 special characters
                         word = "{}{}{}{}{}".format(i,j,k,l,m)
-                        hash = hashlib.sha256(word.encode("utf-8")).hexdigest()
-                        if compareHashes(inFile,hash):
-                            return word, hash
+                        passCount = compareHashes(passCount, inFile, word)
+                        if passCount == hashCount:
+                            return passCount
 
-    return "-1", "-1"
+    return passCount
 
+'''
 # a five char word from /usr/share/dict/words witht he letter 'a' in it which
 # gets replaced with the special character '@' and the character 'l' which is
 # substituted with th number '1'
@@ -201,9 +201,9 @@ def main():
     passCount = 0
 
     passCount = ruleA(passCount, hashFile, hashCount)
-    '''
     if passCount < hashCount:
-        ruleB()
+        passCount = ruleB(passCount, hashFile, hashCount)
+    '''
     if passCount < hashCount:
         ruleC()
     if passCount < hashCount:
