@@ -93,24 +93,15 @@ def ruleC(passCount, inFile, hashCount, outFile, dictPath="/usr/share/dict/words
         ## a.  Check for these conditions.
         if(len(word) == 5 and ('a' in word or 'A' in word)):
             ## Create letter replacements
-            word = word.lower()
             word = word.replace('a', '@')
+            word = word.replace('A', '@')
             word = word.replace('l','1')
-
+            word = word.replace('L','1')
             ## This if statement only checks for uppercase passwords
             passCount = compareHashes(passCount, inFile, word, outFile)
             if passCount == hashCount:
                 dict.close()
                 return passCount
-            ## Need to lowercase words to check for that instance
-            if(word.startswith("1",0,1) == False and word.startswith("@",0,1)== False):
-                word = word.capitalize()
-
-                ## This if statement only checks for lowercase passwords
-                passCount = compareHashes(passCount, inFile, word, outFile)
-                if passCount == hashCount:
-                    dict.close()
-                    return passCount
 
     dict.close()
     return passCount
@@ -197,7 +188,6 @@ def main():
     if len(args) != 2:
         print("Expected one argument and received {}.".format(len(args)-1))
         return
-
     # open file and check length
     hashFile = open(args[1],"r")
     hashCount = 0
