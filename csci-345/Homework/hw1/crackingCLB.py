@@ -80,9 +80,9 @@ def ruleB(passCount, inFile, hashCount, outFile):
     return passCount
 
 
-# a five char word from /usr/share/dict/words witht he letter 'a' in it which
+# a five char word from /usr/share/dict/words with the letter 'a' in it which
 # gets replaced with the special character '@' and the character 'l' which is
-# substituted with th number '1'
+# substituted with the number '1'
 def ruleC(passCount, inFile, hashCount, outFile, dictPath="/usr/share/dict/words"):
     dict = open(dictPath,"r")
 
@@ -91,7 +91,7 @@ def ruleC(passCount, inFile, hashCount, outFile, dictPath="/usr/share/dict/words
         word = word.strip("\n")
         ## This rule only cares about words of length 5 and including the letter
         ## a.  Check for these conditions.
-        if(len(word) == 5 and ('a' in word or 'A' in word)):
+        if(len(word) == 5 and ('a' in word or 'A' in word or 'l' in word or 'L' in word)):
             ## Create letter replacements
             word = word.replace('a', '@')
             word = word.replace('A', '@')
