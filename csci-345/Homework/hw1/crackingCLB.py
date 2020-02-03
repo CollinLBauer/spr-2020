@@ -11,15 +11,14 @@ def compareHashes(passCount, hashFile, testWord, outFile):
     hashFile.seek(0)
     testHash = hashlib.sha256(testWord.encode("utf-8")).hexdigest()
 
+    # compare each hash in file against test hash
     for hash in hashFile:
         hash = hash.strip("\n")
         hashList = hash.split(":")
-        if(hashList[1] == testHash):
+        if(hashList[1] == testHash):  # increment counter, print results and write to output
             passCount += 1
             print("{}: {} <{}>".format(hashList[0], testWord, hashList[1]))
-            file = open(outFile, "a")
-            file.write("{}: {}\n".format(hashList[0], testWord))
-            file.close()
+            outFile.write("{}: {}\n".format(hashList[0], testWord))
 
     return passCount
 
@@ -181,41 +180,48 @@ def ruleE(passCount, inFile, hashCount, outFile, dictPath="/usr/share/dict/words
 
 def main():
     # check to see if arguments are valid
-    outFile = "passWords.txt"
-    file = open(outFile, "w")
-    file.close()
     args = sys.argv
     if len(args) != 2:
         print("Expected one argument and received {}.".format(len(args)-1))
         return
-    # open file and check length
+    
+    # open output file
+    # WARNING: This will overwrite anything already in the file.
+    OUTPUT_NAME = "passWords.txt"
+    outFile = open(OUTPUT_NAME, "w")
+
+    # open hash file and check length
     hashFile = open(args[1],"r")
     hashCount = 0
     for line in hashFile:
         hashCount += 1
     hashFile.seek(0)
 
+    # number of found passwords
     passCount = 0
 
+    # run the hashes through each of the rules
+    # If the pass count is ever equal to the length, it will exit early.
+    # These should be organized by their time efficiency.
     passCount = ruleB(passCount, hashFile, hashCount, outFile)
-
     if passCount < hashCount:
         passCount = ruleC(passCount, hashFile, hashCount, outFile)
-
     if passCount < hashCount:
         passCount = ruleA(passCount, hashFile, hashCount, outFile)
-
     if passCount < hashCount:
         passCount = ruleE(passCount, hashFile, hashCount, outFile)
-
     if passCount < hashCount:
         passCount = ruleD(passCount, hashFile, hashCount, outFile)
 
+    # Print if there are any unmatched hashes
     if passCount < hashCount:
         print("{} hashes not found.".format(hashCount - passCount))
 
-    # close file
+    # close files and finish program
+    outFile.close()
     hashFile.close()
     print("Done.")
 
-main()
+# only run if called directly
+if __name__ == "__main__":
+    main()
