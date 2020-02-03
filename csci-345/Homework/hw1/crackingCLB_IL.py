@@ -3,6 +3,7 @@ import re
 import os
 import threading
 import sys
+import itertools
 
 # helper method
 # uses regular expressions to search for a submitted hash
@@ -47,42 +48,21 @@ def ruleA(passCount, inFile, hashCount, outFile, dictPath="/usr/share/dict/words
 # characters in the beginning: *,~,!,#
 def ruleB(passCount, inFile, hashCount, outFile):
     spec = ["*","~","!","#"]
-    for i in spec:
-        for num in range(10000): # 1 special character, 4 numbers
-            word = "{}{:04}".format(i,num)
+    products = itertools.product("*~!#0123456789", repeat = 4)
+    for prod in products:
+        last4 = "".join(prod)
+        for x in range(4):
+            word = (spec[x] + last4)
+            word.strip("\n")
             passCount = compareHashes(passCount, inFile, word, outFile)
             if passCount == hashCount:
-                    return passCount
-        for j in spec:
-            for num in range(1000): # 2 special characters, 3 numbers
-                word = "{}{}{:03}".format(i,j,num)
-                passCount = compareHashes(passCount, inFile, word, outFile)
-                if passCount == hashCount:
-                    return passCount
-            for k in spec:
-                for num in range(100): # 3 special characters, 2 numbers
-                    word = "{}{}{}{:02}".format(i,j,k,num)
-                    passCount = compareHashes(passCount, inFile, word, outFile)
-                    if passCount == hashCount:
-                        return passCount
-                for l in spec:
-                    for num in range(10): # 4 special characters, 1 number
-                        word = "{}{}{}{}{:01}".format(i,j,k,l,num)
-                        passCount = compareHashes(passCount, inFile, word, outFile)
-                        if passCount == hashCount:
-                            return passCount
-                    for m in spec: # 5 special characters
-                        word = "{}{}{}{}{}".format(i,j,k,l,m)
-                        passCount = compareHashes(passCount, inFile, word, outFile)
-                        if passCount == hashCount:
-                            return passCount
-
+                return passCount
     return passCount
 
 
-# a five char word from /usr/share/dict/words witht he letter 'a' in it which
+# a five char word from /usr/share/dict/words with the letter 'a' in it which
 # gets replaced with the special character '@' and the character 'l' which is
-# substituted with th number '1'
+# substituted with the number '1'
 def ruleC(passCount, inFile, hashCount, outFile, dictPath="/usr/share/dict/words"):
     dict = open(dictPath,"r")
 
@@ -91,27 +71,17 @@ def ruleC(passCount, inFile, hashCount, outFile, dictPath="/usr/share/dict/words
         word = word.strip("\n")
         ## This rule only cares about words of length 5 and including the letter
         ## a.  Check for these conditions.
-        if(len(word) == 5 and ('a' in word or 'A' in word)):
-            word = word.lower()
+        if(len(word) == 5 and ('a' in word or 'A' in word or 'l' in word or 'L' in word)):
             ## Create letter replacements
             word = word.replace('a', '@')
+            word = word.replace('A', '@')
             word = word.replace('l','1')
-
+            word = word.replace('L','1')
             ## This if statement only checks for uppercase passwords
             passCount = compareHashes(passCount, inFile, word, outFile)
             if passCount == hashCount:
                 dict.close()
                 return passCount
-
-            ## Need to lowercase words to check for that instance
-            if(word.startswith("1") == False or word.startswith("@")== False):
-                word = word.capitalize()
-
-                ## This if statement only checks for lowercase passwords
-                passCount = compareHashes(passCount, inFile, word, outFile)
-                if passCount == hashCount:
-                    dict.close()
-                    return passCount
 
     dict.close()
     return passCount
@@ -119,44 +89,49 @@ def ruleC(passCount, inFile, hashCount, outFile, dictPath="/usr/share/dict/words
 
 # any word that is made with digits up to 7 digits length
 def ruleD(passCount, inFile, hashCount, outFile):
-    ## Need to use a range of 10000000 becuase the upper bound is not included
-    for x in range(10000000):
-        ## Format is nessecary to check for leading zeroes
+    for x in range(10):
         ## Checks for a single digit number
-        word = "{:01}".format(x)
+        word = str(x)
         passCount = compareHashes(passCount, inFile, word, outFile)
         if passCount == hashCount:
             return passCount
+    for x in range(100):
         ## Checks for double digit number
         word = "{:02}".format(x)
         passCount = compareHashes(passCount, inFile, word, outFile)
         if passCount == hashCount:
             return passCount
+    for x in range(1000):
         ## Checks for triple digit number
         word = "{:03}".format(x)
         passCount = compareHashes(passCount, inFile, word, outFile)
         if passCount == hashCount:
             return passCount
+    for x in range(10000):
         ## Checks for quadruple digit number
         word = "{:04}".format(x)
         passCount = compareHashes(passCount, inFile, word, outFile)
         if passCount == hashCount:
             return passCount
+    for x in range(100000):
         ## Checks for quintuple digit number
         word = "{:05}".format(x)
         passCount = compareHashes(passCount, inFile, word, outFile)
         if passCount == hashCount:
             return passCount
+    for x in range(1000000):
         ## Checks for sextuple digit number
         word = "{:06}".format(x)
         passCount = compareHashes(passCount, inFile, word, outFile)
         if passCount == hashCount:
             return passCount
-        ## Checks for octuple digit number
+    for x in range(10000000):
+        ## Checks for septuple digit number
         word = "{:07}".format(x)
         passCount = compareHashes(passCount, inFile, word, outFile)
         if passCount == hashCount:
             return passCount
+
     return passCount
 
 
@@ -193,7 +168,6 @@ def main():
     if len(args) != 2:
         print("Expected one argument and received {}.".format(len(args)-1))
         return
-
     # open file and check length
     hashFile = open(args[1],"r")
     hashCount = 0
@@ -217,10 +191,8 @@ def main():
     if passCount < hashCount:
         passCount = ruleD(passCount, hashFile, hashCount, outFile)
 
-
     if passCount < hashCount:
         print("{} hashes not found.".format(hashCount - passCount))
-
 
     # close file
     hashFile.close()
