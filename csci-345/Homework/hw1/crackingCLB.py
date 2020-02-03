@@ -1,8 +1,6 @@
 import hashlib
-import re
-import os
-import threading
 import sys
+import itertools
 
 # helper method
 # uses regular expressions to search for a submitted hash
@@ -46,36 +44,15 @@ def ruleA(passCount, inFile, hashCount, outFile, dictPath="/usr/share/dict/words
 # characters in the beginning: *,~,!,#
 def ruleB(passCount, inFile, hashCount, outFile):
     spec = ["*","~","!","#"]
-    for i in spec:
-        for num in range(10000): # 1 special character, 4 numbers
-            word = "{}{:04}".format(i,num)
+    products = itertools.product("*~!#0123456789", repeat = 4)
+    for prod in products:
+        last4 = "".join(prod)
+        for x in range(4):
+            word = (spec[x] + last4)
+            word.strip("\n")
             passCount = compareHashes(passCount, inFile, word, outFile)
             if passCount == hashCount:
-                    return passCount
-        for j in spec:
-            for num in range(1000): # 2 special characters, 3 numbers
-                word = "{}{}{:03}".format(i,j,num)
-                passCount = compareHashes(passCount, inFile, word, outFile)
-                if passCount == hashCount:
-                    return passCount
-            for k in spec:
-                for num in range(100): # 3 special characters, 2 numbers
-                    word = "{}{}{}{:02}".format(i,j,k,num)
-                    passCount = compareHashes(passCount, inFile, word, outFile)
-                    if passCount == hashCount:
-                        return passCount
-                for l in spec:
-                    for num in range(10): # 4 special characters, 1 number
-                        word = "{}{}{}{}{:01}".format(i,j,k,l,num)
-                        passCount = compareHashes(passCount, inFile, word, outFile)
-                        if passCount == hashCount:
-                            return passCount
-                    for m in spec: # 5 special characters
-                        word = "{}{}{}{}{}".format(i,j,k,l,m)
-                        passCount = compareHashes(passCount, inFile, word, outFile)
-                        if passCount == hashCount:
-                            return passCount
-
+                return passCount
     return passCount
 
 
