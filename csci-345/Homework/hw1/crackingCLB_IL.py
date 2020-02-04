@@ -74,9 +74,7 @@ def ruleC(passCount, inFile, hashCount, outFile, dictPath="/usr/share/dict/words
         if(len(word) == 5 and ('a' in word or 'A' in word or 'l' in word or 'L' in word)):
             ## Create letter replacements
             word = word.replace('a', '@')
-            word = word.replace('A', '@')
             word = word.replace('l','1')
-            word = word.replace('L','1')
             ## This if statement only checks for uppercase passwords
             passCount = compareHashes(passCount, inFile, word, outFile)
             if passCount == hashCount:
