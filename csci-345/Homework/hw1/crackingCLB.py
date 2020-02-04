@@ -1,6 +1,6 @@
 import hashlib
 import sys
-import itertools
+import multiprocessing as mp
 
 # helper method
 # uses regular expressions to search for a submitted hash
@@ -44,15 +44,36 @@ def ruleA(passCount, inFile, hashCount, outFile, dictPath="/usr/share/dict/words
 # characters in the beginning: *,~,!,#
 def ruleB(passCount, inFile, hashCount, outFile):
     spec = ["*","~","!","#"]
-    products = itertools.product("*~!#0123456789", repeat = 4)
-    for prod in products:
-        last4 = "".join(prod)
-        for x in range(4):
-            word = (spec[x] + last4)
-            word.strip("\n")
+    for i in spec:
+        for num in range(10000): # 1 special character, 4 numbers
+            word = "{}{:04}".format(i,num)
             passCount = compareHashes(passCount, inFile, word, outFile)
             if passCount == hashCount:
-                return passCount
+                    return passCount
+        for j in spec:
+            for num in range(1000): # 2 special characters, 3 numbers
+                word = "{}{}{:03}".format(i,j,num)
+                passCount = compareHashes(passCount, inFile, word, outFile)
+                if passCount == hashCount:
+                    return passCount
+            for k in spec:
+                for num in range(100): # 3 special characters, 2 numbers
+                    word = "{}{}{}{:02}".format(i,j,k,num)
+                    passCount = compareHashes(passCount, inFile, word, outFile)
+                    if passCount == hashCount:
+                        return passCount
+                for l in spec:
+                    for num in range(10): # 4 special characters, 1 number
+                        word = "{}{}{}{}{:01}".format(i,j,k,l,num)
+                        passCount = compareHashes(passCount, inFile, word, outFile)
+                        if passCount == hashCount:
+                            return passCount
+                    for m in spec: # 5 special characters
+                        word = "{}{}{}{}{}".format(i,j,k,l,m)
+                        passCount = compareHashes(passCount, inFile, word, outFile)
+                        if passCount == hashCount:
+                            return passCount
+
     return passCount
 
 
@@ -82,9 +103,7 @@ def ruleC(passCount, inFile, hashCount, outFile, dictPath="/usr/share/dict/words
     dict.close()
     return passCount
 
-
-# any word that is made with digits up to 7 digits length
-def ruleD(passCount, inFile, hashCount, outFile):
+def ruleD_01(passCount, inFile, hashCount, outFile):
     for x in range(10):
         ## Checks for a single digit number
         word = str(x)
@@ -115,19 +134,54 @@ def ruleD(passCount, inFile, hashCount, outFile):
         passCount = compareHashes(passCount, inFile, word, outFile)
         if passCount == hashCount:
             return passCount
+    return passCount
+
+def ruleD_02(passCount, inFile, hashCount, outFile):
     for x in range(1000000):
         ## Checks for sextuple digit number
         word = "{:06}".format(x)
         passCount = compareHashes(passCount, inFile, word, outFile)
         if passCount == hashCount:
             return passCount
-    for x in range(10000000):
-        ## Checks for septuple digit number
+    return passCount
+
+def ruleD_03(passCount, inFile, hashCount, outFile, start):
+    for x in range(start, start + 1000000):
+        ## Checks for septuple number within range of 1000000
         word = "{:07}".format(x)
         passCount = compareHashes(passCount, inFile, word, outFile)
         if passCount == hashCount:
             return passCount
+    return passCount
 
+# any word that is made with digits up to 7 digits length
+# This method is a helper which creates several subprocesses to do the heavy lifting
+def ruleD(passCount, inFile, hashCount, outFile):
+    procList = []           # process list
+    output = mp.Queue()     # output queue
+    
+    procList.append(mp.Process(target=ruleD_01, args=(0, inFile, hashCount, outFile)))
+    procList.append(mp.Process(target=ruleD_02, args=(0, inFile, hashCount, outFile)))
+    procList.append(mp.Process(target=ruleD_03, args=(0, inFile, hashCount, outFile, 0)))
+    procList.append(mp.Process(target=ruleD_03, args=(0, inFile, hashCount, outFile, 1000000)))
+    procList.append(mp.Process(target=ruleD_03, args=(0, inFile, hashCount, outFile, 2000000)))
+    procList.append(mp.Process(target=ruleD_03, args=(0, inFile, hashCount, outFile, 3000000)))
+    procList.append(mp.Process(target=ruleD_03, args=(0, inFile, hashCount, outFile, 4000000)))
+    procList.append(mp.Process(target=ruleD_03, args=(0, inFile, hashCount, outFile, 5000000)))
+    procList.append(mp.Process(target=ruleD_03, args=(0, inFile, hashCount, outFile, 6000000)))
+    procList.append(mp.Process(target=ruleD_03, args=(0, inFile, hashCount, outFile, 7000000)))
+    procList.append(mp.Process(target=ruleD_03, args=(0, inFile, hashCount, outFile, 8000000)))
+    procList.append(mp.Process(target=ruleD_03, args=(0, inFile, hashCount, outFile, 9000000)))
+
+    for p in procList:
+        p.start()
+    
+    for p in procList:
+        p.join()
+
+    for p in procList:
+        passCount += output.get()
+    
     return passCount
 
 
@@ -180,7 +234,8 @@ def main():
     # run the hashes through each of the rules
     # If the pass count is ever equal to the length, it will exit early.
     # These should be organized by their time efficiency.
-    passCount = ruleB(passCount, hashFile, hashCount, outFile)
+    passCount = ruleD(passCount, hashFile, hashCount, outFile)
+    '''
     if passCount < hashCount:
         passCount = ruleC(passCount, hashFile, hashCount, outFile)
     if passCount < hashCount:
@@ -189,6 +244,7 @@ def main():
         passCount = ruleE(passCount, hashFile, hashCount, outFile)
     if passCount < hashCount:
         passCount = ruleD(passCount, hashFile, hashCount, outFile)
+    '''
 
     # Print if there are any unmatched hashes
     if passCount < hashCount:
