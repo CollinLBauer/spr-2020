@@ -101,93 +101,51 @@ def ruleC(passCount, inFile, hashCount, outFile, dictPath="/usr/share/dict/words
     dict.close()
     return passCount
 
-def ruleD_01(passCount, inFile, hashCount, outFile, queue, lock):
-    print("01")
+# any word that is made with digits up to 7 digits length
+def ruleD(passCount, inFile, hashCount, outFile):
     for x in range(10):
         ## Checks for a single digit number
         word = str(x)
-        lock.acquire()
         passCount = compareHashes(passCount, inFile, word, outFile)
-        lock.release()
+        if passCount == hashCount:
+            return passCount
     for x in range(100):
         ## Checks for double digit number
         word = "{:02}".format(x)
-        lock.acquire()
         passCount = compareHashes(passCount, inFile, word, outFile)
-        lock.release()
+        if passCount == hashCount:
+            return passCount
     for x in range(1000):
         ## Checks for triple digit number
         word = "{:03}".format(x)
-        lock.acquire()
         passCount = compareHashes(passCount, inFile, word, outFile)
-        lock.release()
+        if passCount == hashCount:
+            return passCount
     for x in range(10000):
         ## Checks for quadruple digit number
         word = "{:04}".format(x)
-        lock.acquire()
         passCount = compareHashes(passCount, inFile, word, outFile)
-        lock.release()
+        if passCount == hashCount:
+            return passCount
     for x in range(100000):
         ## Checks for quintuple digit number
         word = "{:05}".format(x)
-        lock.acquire()
         passCount = compareHashes(passCount, inFile, word, outFile)
-        lock.release()
-
-    queue.put(passCount)
-
-def ruleD_02(passCount, inFile, hashCount, outFile, queue, lock):
-    print("02")
+        if passCount == hashCount:
+            return passCount
     for x in range(1000000):
         ## Checks for sextuple digit number
         word = "{:06}".format(x)
-        lock.acquire()
         passCount = compareHashes(passCount, inFile, word, outFile)
-        lock.release()
-
-    queue.put(passCount)
-
-def ruleD_03(passCount, inFile, hashCount, outFile, queue, lock, start):
-    print("03: {}".format(start))
-    for x in range(start, start + 1000000):
-        ## Checks for septuple number within range of 1000000
+        if passCount == hashCount:
+            return passCount
+    for x in range(10000000):
+        ## Checks for septuple digit number
         word = "{:07}".format(x)
-        lock.acquire()
         passCount = compareHashes(passCount, inFile, word, outFile)
-        lock.release()
+        if passCount == hashCount:
+            return passCount
 
-    queue.put(passCount)
-
-# any word that is made with digits up to 7 digits length
-# This method is a helper which creates several subprocesses to do the heavy lifting
-def ruleD(passCount, inFile, hashCount, outFile):
-    procList = []           # process list
-    output = mp.Queue()     # output queue
-    lock = mp.Lock()
-    
-    procList.append(mp.Process(target=ruleD_01, args=(0, inFile, hashCount, outFile, output, lock)))
-    procList.append(mp.Process(target=ruleD_02, args=(0, inFile, hashCount, outFile, output, lock)))
-    procList.append(mp.Process(target=ruleD_03, args=(0, inFile, hashCount, outFile, output, lock, 0)))
-    procList.append(mp.Process(target=ruleD_03, args=(0, inFile, hashCount, outFile, output, lock, 1000000)))
-    procList.append(mp.Process(target=ruleD_03, args=(0, inFile, hashCount, outFile, output, lock, 3000000)))
-    procList.append(mp.Process(target=ruleD_03, args=(0, inFile, hashCount, outFile, output, lock, 4000000)))
-    procList.append(mp.Process(target=ruleD_03, args=(0, inFile, hashCount, outFile, output, lock, 2000000)))
-    procList.append(mp.Process(target=ruleD_03, args=(0, inFile, hashCount, outFile, output, lock, 5000000)))
-    procList.append(mp.Process(target=ruleD_03, args=(0, inFile, hashCount, outFile, output, lock, 6000000)))
-    procList.append(mp.Process(target=ruleD_03, args=(0, inFile, hashCount, outFile, output, lock, 7000000)))
-    procList.append(mp.Process(target=ruleD_03, args=(0, inFile, hashCount, outFile, output, lock, 8000000)))
-    procList.append(mp.Process(target=ruleD_03, args=(0, inFile, hashCount, outFile, output, lock, 9000000)))
-
-    for p in procList:
-        p.start()
-    
-    for p in procList:
-        p.join()
-
-    for p in procList:
-        print("output get")
-        passCount += output.get()
-    
     return passCount
 
 
@@ -221,7 +179,7 @@ def main():
     if len(args) != 2:
         print("Expected one argument and received {}.".format(len(args)-1))
         return
-    
+
     # open output file
     # WARNING: This will overwrite anything already in the file.
     OUTPUT_NAME = "passWords.txt"
@@ -241,8 +199,8 @@ def main():
     # run the hashes through each of the rules
     # If the pass count is ever equal to the length, it will exit early.
     # These should be organized by their time efficiency.
-    passCount = ruleD(passCount, hashFile, hashCount, outList)
-    
+    passCount = ruleB(passCount, hashFile, hashCount, outList)
+
     if passCount < hashCount:
         passCount = ruleC(passCount, hashFile, hashCount, outList)
     if passCount < hashCount:
@@ -251,7 +209,7 @@ def main():
         passCount = ruleE(passCount, hashFile, hashCount, outList)
     if passCount < hashCount:
         passCount = ruleD(passCount, hashFile, hashCount, outList)
-    
+
 
     for output in outList:
         outFile.write(output)

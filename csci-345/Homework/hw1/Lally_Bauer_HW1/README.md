@@ -11,6 +11,7 @@ Isabel Lally, Collin Bauer
 ### Testing
 
 A test file has been provided, named `test.txt`, in the same directory.  
+Run: `python3 Lally_Bauer_HW1_passwd_cracking.py test.txt`
 These test cases are in one of two formats:
 - testCaseName:hash:expectedPassword
 - testCaseName(expecteDPassword):hash
@@ -42,3 +43,7 @@ testUserE2: a
 testUserNo: NotGonnaWork will not print to the file, since the password doesn't
 follow any of the five rules.  This will test the worst case for all rules.  The
 number of hashes not found will print to the console.
+
+We attempted both multithreading and multiprocessing to increase efficiency,
+however, the way we implemented those concepts actually slowed it down.  It was
+our first time attempting to implement either.
