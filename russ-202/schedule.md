@@ -92,6 +92,14 @@ Class Assignment Schedule
     <td></td>
     <td></td>
   </tr>
+  <tr>
+    <td><strong>FINAL EXAM</strong></td> 
+    <td></td>
+    <td></td>
+    <td>Test</td>
+    <td></td>
+    <td>Apr</td>
+  </tr>
 </table>
 
 <br/>
@@ -103,5 +111,3 @@ Class Assignment Schedule
 ## [OAKS Content](https://cofc.brightspace.com/d2l/le/content/229058/Home?itemIdentifier=TOC)
 
 ## [Official Schedule](https://docs.google.com/document/d/1za8TJ8SCUe4RGQgYjmK_CGwHYFsBkcD5jXTtp4Xonyk/edit)
-
-aaa
