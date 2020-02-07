@@ -87,6 +87,14 @@ Class Assignment Schedule
     <td>Feb 18</td>
   </tr>
   <tr>
+    <td><strong>MIDTERM EXAM</strong></td>
+    <td></td>
+    <td>Test</td>
+    <td></td>
+    <td></td>
+    <td>Feb 20</td>
+  </tr>
+  <tr>
     <td>Lab 5</td>
     <td>Web app exploits</td>
     <td>Lab</td>
@@ -145,7 +153,7 @@ Class Assignment Schedule
   <tr>
     <td><strong>FINAL EXAM</strong></td>
     <td></td>
-    <td>Final</td>
+    <td>Test</td>
     <td></td>
     <td></td>
     <td>Apr 28</td>
