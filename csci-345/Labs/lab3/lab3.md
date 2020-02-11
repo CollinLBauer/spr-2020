@@ -48,22 +48,22 @@
     Bob(public, private, N) = Bob(47, 143, 899)
     Message to send = "1 7 3 5 1"
 
-    Ek(m) = text^47 mod 899
-          = 1^47 mod 899 = 1
-          = 7^47 mod 899 = 886
-          = 3^47 mod 899 = 859
-          = 5^47 mod 899 = 428
-          = 1^47 mod 899 = 1
-    Message Alice Sends to Bob = "1 886 859 428 1"
+        Ek(m) = text^47 mod 899
+              = 1^47 mod 899 = 1
+              = 7^47 mod 899 = 886
+              = 3^47 mod 899 = 859
+              = 5^47 mod 899 = 428
+              = 1^47 mod 899 = 1
+        Message Alice Sends to Bob = "1 886 859 428 1"
 
-    Dk(c) = cipher^143 mod 899
-          = 1^143 mod 899 = 1
-          = 886^143 mod 899 = 7
-          = 859^143 mod 899 = 3
-          = 428^143 mod 899 = 5
-          = 1^143 mod 899 = 1
+        Dk(c) = cipher^143 mod 899
+              = 1^143 mod 899 = 1
+              = 886^143 mod 899 = 7
+              = 859^143 mod 899 = 3
+              = 428^143 mod 899 = 5
+              = 1^143 mod 899 = 1
 
-    Bob's Decrypted Message = "1 7 3 5 1"
+        Bob's Decrypted Message = "1 7 3 5 1"
 
 2.  AES: Probability of guessing the AES-128 key in single try =   1/2^128
 
