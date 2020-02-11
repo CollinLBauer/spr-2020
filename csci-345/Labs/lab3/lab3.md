@@ -74,9 +74,9 @@
         -Since the numbers must be different,
          These are the number of choices for each number:
             _    _    _    _    _    _    _
-            35 * 34 * 33 * 32 * 31 * 30 * 29  = 33,891,580,800
+            36 * 35 * 34 * 33 * 32 * 31 * 30  = 42,072,307,200
 
-        Only 1 ticket wins so odds are 1/33,891,580,800.
+        Only 1 ticket wins so odds are 1/42,072,307,200
 
         This is approximately 1/2^35 to win once
 
