@@ -21,7 +21,7 @@ def every_other():
 
 def letter_frequency():
     print("Calculates frequency of characters in a string.")
-    myStr = input("Enter string to parse:")
+    myStr = input("Enter string to parse: ")
 
     # create list of character frequencies
     # position in list corresponds to ASCII value of letters
@@ -36,4 +36,24 @@ def letter_frequency():
         if charList[i] != 0:
             print("{}: {}".format(chr(i+32), charList[i]))
 
-every_other()
+
+if __name__ == "__main__":
+    print("Choose one of the folliwing options..\n"
+          + "  1: convert numbers to letters\n"
+          + "  2: take every other letter\n"
+          + "  3: letter frequency analysis")
+
+    var = 0
+    while var == 0:
+        var = input("Select a function: ")
+        if var == "1":
+            nums_to_lets()
+        elif var == "2":
+            every_other()
+        elif var == "3":
+            letter_frequency()
+        elif var.lower() == "x":
+            exit
+        else:
+            print("Invalid input.")
+            var = 0
