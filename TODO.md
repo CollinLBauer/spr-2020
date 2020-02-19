@@ -1,5 +1,15 @@
 # TO-DO
 
+High priority checklist
+- Russian За Предедами
+- 02/01-02/15 time sheets
+- 01/15-01/31 paper time sheet
+- GENI
+- NCL Registration
+- 340 HW5
+
+<br/>
+
 Job related
 - contact Kathy one more time about NIWC (I guess)
 - apply to Fast & give resume (if applicable)
