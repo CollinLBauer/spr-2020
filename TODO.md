@@ -1,15 +1,17 @@
 # TO-DO
 
 **High priority checklist**
-- Russian За Предедами
+- 340 HW5
 - 01/15-01/31 paper time sheet
 - GENI
 - NCL Registration
-- 340 HW5
+
 
 ---
 
 <br/>
+
+*If any of the below are high priority, move it up top.*
 
 Job related
 - contact Kathy one more time about NIWC (I guess)
@@ -21,7 +23,6 @@ Adult related
 - apply for RealID
 
 School related
-- fil out time sheet, get it signed, return to payroll
 - ACM
   - figure out the next workshop
   - pi day stuff probably
@@ -32,7 +33,6 @@ School related
     - Lab 4
     - HW2
   - 340
-    - HW5
     - Project 2
   - RUSS
     - Basically all of the SAMs
