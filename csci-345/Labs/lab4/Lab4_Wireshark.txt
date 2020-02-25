@@ -1,0 +1,62 @@
+Lab 5
+Part 1
+1. Is your browser running HTTP version 1.0 or 1.1? What version of HTTP is the server
+running?
+    Our browser and the server is running version 1.1 of HTTP.
+
+2. What languages (if any) does your browser indicate that it can accept to the server?
+    en-US and en (US English and Standard English)
+
+3. What is the IP address of your computer? Of the gaia.cs.umass.edu server?
+    Computer: 10.5.204.226
+    Server: 128.119.245.12
+
+4. What is the status code returned from the server to your browser?
+    200
+
+5. When was the HTML file that you are retrieving last modified at the server?
+    Mon, 24 February 2020 06:59:04 GMT
+
+6. How many bytes of content are being returned to your browser?
+    128 bytes
+
+7. By inspecting the raw data in the packet content window, do you see any headers within
+   the data that are not displayed in the packet-listing window? If so, name one.
+    No, all headers are there.
+
+Part 2
+
+1. What is the IP address and TCP port number used by the client computer (source) that is
+   transferring the file to gaia.cs.umass.edu? To answer this question, it’s probably easiest
+   to select an HTTP message and explore the details of the TCP packet used to carry this
+   HTTP message, using the “details of the selected packet header window” (refer to Figure
+   2 in the “Getting Started with Wireshark” Lab if you’re uncertain about the Wireshark
+   windows.
+    Client IP: 10.5.204.226
+    Client Port: 56258
+
+2. What is the IP address of gaia.cs.umass.edu? On what port number is it sending and
+   receiving TCP segments for this connection?
+    Gaia IP: 128.119.245.12
+    Gaia Port: 80
+
+3. What is the IP address and TCP port number used by your client computer (source) to
+   transfer the file to gaia.cs.umass.edu?
+    Client IP: 10.5.204.226
+    Client Port: 56258
+
+4. What is the sequence number of the TCP SYN segment that is used to initiate the TCP
+   connection between the client computer and gaia.cs.umass.edu? What is it in the segment
+   that identifies the segment as a SYN segment?
+    Sequence Number: 152515
+    There is a specific bit in the sequence that acts as a flag specifying the segment as a SYN segment.
+
+5. What is the sequence number of the SYNACK segment sent by gaia.cs.umass.edu to the
+   client computer in reply to the SYN? What is the value of the Acknowledgement field in
+   the SYNACK segment? How did gaia.cs.umass.edu determine that value? What is it in
+   the segment that identifies the segment as a SYNACK segment.
+    Sequence Number: 1
+    Ack: 152961
+    The SYN value of 1 indicates that gaia.cs.edu successfully received the request. The ACK number comes
+      from our original SYN number and adding the segment length (446) to it.
+    There is a specific bit in the sequence that acts as a flag specifying the segment as a SYNACK segment.
