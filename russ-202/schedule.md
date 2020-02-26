@@ -111,3 +111,11 @@ Class Assignment Schedule
 ## [OAKS Content](https://cofc.brightspace.com/d2l/le/content/229058/Home?itemIdentifier=TOC)
 
 ## [Official Schedule](https://docs.google.com/document/d/1za8TJ8SCUe4RGQgYjmK_CGwHYFsBkcD5jXTtp4Xonyk/edit)
+
+
+
+---
+
+Урок 4 SAM pp. 89-98, exercises 1-13
+
+[Test workig document](https://docs.google.com/document/d/1V3a4OyGDTgy2I0ui8SVNRRVsDZGDdGsVDwARIqE9lQk/edit)
