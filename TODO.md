@@ -1,11 +1,13 @@
 # TO-DO
 
 **High priority checklist**
-- 340 HW5
-- 01/15-01/31 paper time sheet
-- GENI
+- 345 HW2
+- Pay credit card
+- turn in paper time sheet
 - NCL Registration
-
+- ONGF prep
+- Apply for RealID
+- 340 HW6
 
 ---
 
@@ -20,18 +22,14 @@ Job related
 
 Adult related
 - taxes
-- apply for RealID
 
 School related
 - ACM
   - figure out the next workshop
   - pi day stuff probably
-  - ONGF prep
   - Hackathon stuff probably
 - Homework
   - 345
-    - Lab 4
-    - HW2
   - 340
     - Project 2
   - RUSS
