@@ -4,4 +4,4 @@ clean:
 	rm pthreads
 
 pthreads: pthreads.c
-	gcc -Wall -o pthreads pthreads.c -pthread
+	gcc -Wall -o pthreads pthreads.c -lpthread
