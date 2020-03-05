@@ -1,0 +1,62 @@
+Points of interest in the OWASP Juice Shop
+This is just things that I found while poking around.
+
+
+/#/administration
+/#/login
+/#/forgot-password
+
+/rest
+/rest/admin
+           /application-configuration
+
+
+/rest/user
+          /erasure-request
+          /data-export
+
+/rest/user/authentication-details/  // ? 401 Unauthorized
+/rest/user/login
+/rest/user/change-password
+/rest/user/reset-password
+/rest/user/whoami                   //JSON
+/rest/saveLoginIp                   // ? Unauthorized
+/rest/deluxe-membership             // ? 500 JsonWebTokenError
+/rest/basket/ + t
+/rest/basket/ + t + /checkout
+/rest/basket/ + t +/coupon/ + e
+/rest/track-order
+/rest/captcha                       //JSON; procedurally generated on backend
+
+/rest/products
+              / + t + /reviews
+              /reviews
+             
+/rest/products/search
+/rest/repeat-notification
+/rest/continue-code
+/rest/continue-code/apply/ + t
+/rest/image-captcha/
+/rest/wallet/balance
+/rest/order-history
+/rest/memories                      //JSON
+/rest/country-mapping               // ? Blank
+
+/api
+/api/Users                          // ? 401 Unauthorized
+/api/BasketItems                    // ? 401 Unauthorized
+/api/Feedbacks                      //JSON
+/api/SecurityQuestions              //JSON
+/api/SecurityAnswers                // ? 401 Unauthrorized
+/api/Products                       //JSON
+/api/Quantitys                      //JSON
+/api/Complaints                     // ? 401 Unauthroized
+/api/Recycles                       //JSON
+/api/Addresss                       //JSON
+/api/Challenges                     //JSON
+/api/Deliverys                      // ? Unresponsive
+/api/Cards                          //JSON
+
+/assets
+/assets/public/images/uploads/magn(et)ificent!-1571814229653.jpg
+/assets/public/images/uploads/my-rare-collectors-item!-[̲̅$̲̅(̲̅-͡°-͜ʖ-͡°̲̅)̲̅$̲̅]-1572603645543.jpg
