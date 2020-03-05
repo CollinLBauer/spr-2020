@@ -1,15 +1,21 @@
 Points of interest in the OWASP Juice Shop
 This is just things that I found while poking around.
 
-
+/* front-end pages */
 /#/administration
 /#/login
 /#/forgot-password
+/#/basket
+/#/order-history
+/#/wallet
 
+/profile
+
+
+/* back-end pages */
 /rest
 /rest/admin
            /application-configuration
-
 
 /rest/user
           /erasure-request
@@ -26,11 +32,14 @@ This is just things that I found while poking around.
 /rest/basket/ + t + /checkout
 /rest/basket/ + t +/coupon/ + e
 /rest/track-order
-/rest/captcha                       //JSON; procedurally generated on backend
+/rest/captcha                       //JSON
 
-/rest/products
-              / + t + /reviews
-              /reviews
+/rest/products/ + t + /reviews      //JSON
+/* t is a prodct ID.
+ * A valid JSON file will be generated for any value of t
+ * However, only values 1-37 (roughly) will give any
+ *  meaningful results.
+ */
              
 /rest/products/search
 /rest/repeat-notification
@@ -57,6 +66,8 @@ This is just things that I found while poking around.
 /api/Deliverys                      // ? Unresponsive
 /api/Cards                          //JSON
 
+
+/* assets */
 /assets
 /assets/public/images/uploads/magn(et)ificent!-1571814229653.jpg
 /assets/public/images/uploads/my-rare-collectors-item!-[̲̅$̲̅(̲̅-͡°-͜ʖ-͡°̲̅)̲̅$̲̅]-1572603645543.jpg

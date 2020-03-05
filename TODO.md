@@ -1,22 +1,22 @@
 # TO-DO
 
 **High priority checklist**
-- 345 HW2
-- Pay credit card
-- turn in paper time sheet
-- NCL Registration
-- ONGF prep
-- Apply for RealID
 - 340 HW6
-
----
+- Check bank account
+- Secure ****** account
+- NCL Registration
+- Apply for RealID
+- RUSS 202 SAM
 
 <br/>
+
+---
 
 *If any of the below are high priority, move it up top.*
 
 Job related
 - contact Kathy one more time about NIWC (I guess)
+- Look into Teach for America
 - apply to Fast & give resume (if applicable)
 - apply to Capgemini RISE
 
@@ -31,6 +31,6 @@ School related
 - Homework
   - 345
   - 340
-    - Project 2
   - RUSS
     - Basically all of the SAMs
+

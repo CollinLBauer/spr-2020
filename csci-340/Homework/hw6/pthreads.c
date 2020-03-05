@@ -4,26 +4,21 @@
 #include <pthread.h>
 
 struct threadParams{
-    int threadnum;
-    char *string;
-    int strLen;
+    int threadnum;      // number of the current thread
+    int strLen;         // length of the string
+    char *string;       // pointer to the string
+    int *curr;          // pointer to string current position
 };
 
 void *threadFun(void *args){
     struct threadParams *data = args;
-    int i = 0;
-    char val[10] = {};
+    printf("Thread: %d: %c\n", data->threadnum, (char)data->threadnum + 65);
 
-    printf("  In thread %d\n", data->threadnum);
-
-    while (i < data->strLen){
-        printf("%d\n",i);
-        printf("[%s]\n",data->string);
-        sprintf(val, "%d", i);
-        printf("hi\n");
-        data->string[i] = val[0];
-        i++;
+    while (*data->curr < data->strLen){
+        data->string[*data->curr] = data->threadnum + 65;
+        *data->curr += 1;
     }
+    free(args);
     return NULL;
 }
 
@@ -45,21 +40,26 @@ int main(int argc, char **argv){
 
     //malloc threads
     pthread_t *threads = malloc(numThreads * sizeof(pthread_t));
+    
+    // counts the length of the string
+    int curr = 0;
+    int *curr_ptr = &curr;
 
-    // placeholder
-    int i = 0;
+    // Create threads
+    for (int i = 0; i < numThreads; i++){
+        // parameters
+        struct threadParams *params = malloc(sizeof(struct threadParams));
+        params->threadnum = i;
+        params->string = finalString;
+        params->strLen = strLen;
+        params->curr = curr_ptr;
 
-    // parameters     
-    struct threadParams *params = malloc(sizeof(struct threadParams));
-    params->threadnum = i;
-    params->string = finalString;
-    params->strLen = strLen;
-
-    // run threads
-    printf("Before thread...\n");
-    pthread_create(&threads[i], NULL, *threadFun, (void*)params);
-    pthread_join(threads[i], NULL);
-    printf("After thread...\n");
+        pthread_create(&threads[i], NULL, *threadFun, (void*)params);
+    }
+    for (int i = 0; i < numThreads; i++){
+        pthread_join(threads[i], NULL);
+    }
+    printf("After...\n"); //debug
     
     printf("Final string: [%s]\n", finalString);
 
