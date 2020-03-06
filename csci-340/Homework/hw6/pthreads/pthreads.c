@@ -10,13 +10,17 @@ struct threadParams{
     int *curr;          // pointer to string current position
 };
 
+pthread_mutex_t lock;
+
 void *threadFun(void *args){
     struct threadParams *data = args;
     printf("Thread: %d: %c\n", data->threadnum, (char)data->threadnum + 65);
 
     while (*data->curr < data->strLen){
+        pthread_mutex_lock(&lock);
         data->string[*data->curr] = data->threadnum + 65;
         *data->curr += 1;
+        pthread_mutex_unlock(&lock);
     }
     free(args);
     return NULL;
@@ -28,6 +32,13 @@ int main(int argc, char **argv){
         printf("Usage: ./pthreads <thread-num> <len-string>\n");
         exit(1);
     }
+
+    // init lock
+    if (pthread_mutex_init(&lock, NULL) != 0){
+        printf("mutex init failed.\n");
+        exit(1);
+    }
+
     printf("Starting...\n");
 
     // grab command line arguments
