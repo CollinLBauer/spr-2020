@@ -16,11 +16,11 @@ Collin Bauer
 
 ### d)
 
-- flag: 404 operations
-- test-and-set: 596 operations
-- yield: 560 operations
+- flag: 404 operations  
+  test-and-set: 596 operations  
+  yield: 560 operations
 
-Flag is easily the fastest, but its locking mechanism does not always work properly, which leads to some incorrect operations during the cirtical secion of code. Test-and-set locks properly, but wastes cycles checking if the lock is free. Yield does the same checking that test-and-set does, but will give up its operations to other threads if it sees that it is locked, leading to some saved cycles over test-and-set.
+- Flag is easily the fastest, but its locking mechanism does not always work properly, which leads to some incorrect operations during the cirtical secion of code. Test-and-set locks properly, but wastes cycles checking if the lock is free. Yield does the same checking that test-and-set does, but will give up its operations to other threads if it sees that it is locked, leading to some saved cycles over test-and-set.
 
 ### e)
 
