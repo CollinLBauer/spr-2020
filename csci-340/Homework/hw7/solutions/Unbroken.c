@@ -43,16 +43,16 @@ void Queue_Enqueue(queue_t *q, int value) {
     q->tail = tmp;                                /* Point tail to new node */
 
     pthread_mutex_unlock(&q->tail_lock);
-    
 }
 
 
 int Queue_Dequeue(queue_t *q, int *value) {
     // Failure is always an option
     int rc = -1;
-        
+
     if (q->head->next != NULL) {
         *value = q->head->next->value;            /* Return the value */
+        printf("  In if\n");
         pthread_mutex_lock(&q->head_lock);        /* Lock the list */
         node_t *tmp = q->head;                    /* Save the old head node pointer */
         q->head = q->head->next;                  /* Reset the head */
@@ -76,12 +76,16 @@ int main(int argc, char **argv){
         Queue_Enqueue(myQueue, i);
     }
 
-    node_t *temp = myQueue->head;
-    while (temp != NULL){
-        // walk through queue and print out info
-        printf("Node <%p>\nVal: %d\n\n", temp, temp->value);
-        temp = temp->next;
+    int *rtnVal = 0;
+    node_t *tempHead;
+    while (myQueue->head != NULL){
+        // dequeue every entry in queue
+        tempHead = myQueue->head;
+        Queue_Dequeue(myQueue, rtnVal);
+        printf("In while\n");
+        printf("Node <%p>\nVal: %d\n\n", tempHead, *rtnVal);
     }
 
+    printf("Done.\n");
     exit(0);
 }
