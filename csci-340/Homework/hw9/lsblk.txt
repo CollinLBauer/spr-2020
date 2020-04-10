@@ -1,0 +1,31 @@
+NAME                  MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+loop0                   7:0    0 120.4M  1 loop /snap/docker/423
+loop1                   7:1    0  14.8M  1 loop /snap/gnome-characters/399
+loop2                   7:2    0  91.4M  1 loop /snap/core/8689
+loop3                   7:3    0   4.3M  1 loop /snap/gnome-calculator/704
+loop4                   7:4    0   3.7M  1 loop /snap/gnome-system-monitor/135
+loop5                   7:5    0   3.7M  1 loop /snap/gnome-system-monitor/127
+loop6                   7:6    0  14.8M  1 loop /snap/gnome-characters/495
+loop7                   7:7    0    55M  1 loop /snap/core18/1705
+loop8                   7:8    0  57.3M  1 loop /snap/discord/109
+loop9                   7:9    0   956K  1 loop /snap/gnome-logs/81
+loop10                  7:10   0  52.7M  1 loop /snap/john-the-ripper/297
+loop11                  7:11   0   956K  1 loop /snap/gnome-logs/93
+loop12                  7:12   0 142.8M  1 loop /snap/code/28
+loop13                  7:13   0 156.7M  1 loop /snap/gnome-3-28-1804/110
+loop14                  7:14   0 160.2M  1 loop /snap/gnome-3-28-1804/116
+loop15                  7:15   0 140.7M  1 loop /snap/gnome-3-26-1604/98
+loop16                  7:16   0 142.3M  1 loop /snap/slack/21
+loop17                  7:17   0  93.8M  1 loop /snap/core/8935
+loop18                  7:18   0  58.9M  1 loop /snap/discord/108
+loop19                  7:19   0 142.7M  1 loop /snap/code/26
+loop20                  7:20   0  54.7M  1 loop /snap/core18/1668
+loop21                  7:21   0  48.3M  1 loop /snap/gtk-common-themes/1474
+loop22                  7:22   0   4.2M  1 loop /snap/gnome-calculator/544
+loop23                  7:23   0 142.2M  1 loop /snap/slack/22
+loop24                  7:24   0  44.9M  1 loop /snap/gtk-common-themes/1440
+sda                     8:0    0 119.2G  0 disk 
+├─sda1                  8:1    0   512M  0 part /boot/efi
+└─sda2                  8:2    0 118.8G  0 part 
+  ├─ubuntu--vg-root   253:0    0 117.8G  0 lvm  /
+  └─ubuntu--vg-swap_1 253:1    0   980M  0 lvm  [SWAP]
