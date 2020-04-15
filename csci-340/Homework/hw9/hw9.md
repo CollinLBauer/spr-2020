@@ -1,4 +1,8 @@
-I am running Ubuntu 18.04 directly from an Acer laptop, not in an virtual environment. As such, I have no virtual devices- only physical.
+#### Collin Bauer
+
+## CSCI 340 - Homework 9
+
+---
 
 ## 1. Device Information
 
@@ -8,14 +12,14 @@ I am running Ubuntu 18.04 directly from an Acer laptop, not in an virtual enviro
 
 | Column name | Description |
 |-|-|
-| NAME | unique device name
-| MAJ | major device number; typically refers to a driver
-| MIN | minor device number; usually a distinct instance of a driver
-| RM | flag stating whether a device is removable
-| SIZE | size of the device
-| RO | flag stating whether a device is read-only
-| TYPE | device type
-| MOUNTPOINT | where the device is mounted in the linux filesystem
+| NAME | unique device name |
+| MAJ | major device number; typically refers to a driver |
+| MIN | minor device number; usually a distinct instance of a driver |
+| RM | flag stating whether a device is removable |
+| SIZE | size of the device |
+| RO | flag stating whether a device is read-only |
+| TYPE | device type |
+| MOUNTPOINT | where the device is mounted in the linux filesystem |
 
 - There are many different device types, including drive, partition, loop device, multi-devices (like RAID), and device mappers (lvm). Some of these I recognize. Others are new, like device mappers.
 - From a Windows-user perspective, the mount point is a very strange concept. In Windows, all storage devices are mounted from a root position and have their own file systems, barring symlinks (C:\, D:\, X:\, etc.). Seeing storage devices share the same filesystem was very confusing at first.
@@ -56,16 +60,18 @@ sda                     8:0    0 119.2G  0 disk
 
 Curiously, this command fails to run in a WSL environment, since it does not expose block devices in /sys/dev/block.
 
+<br/>
+
 ### b) Program lsusb
 
 ***lsusb*** stands for "List USB devices". It gives information about different USB buses and devices connected to them.
 
 | Column name | Description |
 |-|-|
-| Bus # | bus number a device is connected to
-| Device # | device number; specific to bus
-| ID # | device ID
-| Name | name of the device
+| Bus # | bus number a device is connected to |
+| Device # | device number; specific to bus |
+| ID # | device ID |
+| Name | name of the device |
 
 - Each bus may support multiple devices. Device numbers are specific to the bus it is connected to.
 - Device 001 seems to be the root hub of each bus. I don't know the significance of this.
@@ -80,13 +86,34 @@ Bus 003 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
 Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 ```
 
+I am running Ubuntu 18.04 directly from a laptop, not in an virtual environment. As such, I have no virtual buses, only physical.
+
 <br/>
+
+---
 
 ## 2. Storage Nomenclature
 
-1. A ***Host Bus Adapter*** seems to refer to adapter cards which use PCIe (or another expansion standard) to allow a host computer to have additional buses, be them USB, SATA storage, or network cards. USB and SATA cards are used to give a computer additional storage or I/O points. Network cards allow for additional, or perhaps faster, network adapters. Other HBA types exist, like sound cards, but are not as frequently used.
-2. ***SATA*** stands for Serial AT Aattachment (where AT is Advanced Technology, taken from IBM PC/AT back in the late 80's). This is a standardized bus that connects a host computer to storage devices, drives, etc. SATA is an evolution of the ATA standard, and SATA itself has seen several revisions over the years. Most computers today use some version of SATA for its storage bus.
-3. ***Fiber Channel*** (*Fibre*?) is a formm of data transfer that usually runs over fiber optics, and is considered very fast today, achieving up to 128Gb/s. Several different protols are built on fiber channel, including (unsurprisingly) Fiber Channel Protocol (FBC). Fiber channel requires a dedicated connection between devices, and it not compatible with other protocols, such as IP.
-4. ***iSCSi*** stands for Internet Small Computer Systems Interface. Wikipedia calls it an IP-based standard that allows block-level access to other devices over Local or Wide Area Networks. If I understand correctly, this means it effectively lets one device actively access, read, and write files onto another device on the same network. Compared to fiber channel, iSCSi is much more easier to implement.
-5. A ***Storage Area Network*** (SAN) is a specialized network dedicated to storage servers. It effectively combines a larger array of storage nodes in such a way that any server accessing them sees the data as locally attached, by providing block-level access, through the use of an interconnect such as Fiber Channel or iSCSi. SANs are very scalable, but require their own dedicated network hardware, which makes them relatively expensive.
-6. ***Network Attached Storage*** (NAS) is an alternative to SAN, typically implemented as a specialiized computer dedicated to nothing but data storage. NAS devices have extra space for storage devices and often use redundancy technology like RAID. They exist on a normal LAN instead of in their own dedicated nework, so are relatively easy to deploy when compared to SAN.
+### a) Host Bus Adapter
+
+A ***Host Bus Adapter*** seems to refer to adapter cards which use PCIe (or another expansion standard) to allow a host computer to have additional buses, be them USB, SATA storage, or network cards. USB and SATA cards are used to give a computer additional storage or I/O points. Network cards allow for additional, or perhaps faster, network adapters. Other HBA types exist, like sound cards, but are not as frequently used.
+
+### b) SATA
+
+***SATA*** stands for Serial AT Aattachment (where AT is Advanced Technology, taken from IBM PC/AT back in the late 80's). This is a standardized bus that connects a host computer to storage devices, drives, etc. SATA is an evolution of the ATA standard, and SATA itself has seen several revisions over the years. Most computers today use some version of SATA for its storage bus.
+
+### c) Fiber Channel
+
+***Fiber Channel*** (*Fibre*?) is a formm of data transfer that usually runs over fiber optics, and is considered very fast today, achieving up to 128Gb/s. Several different protols are built on fiber channel, including (unsurprisingly) Fiber Channel Protocol (FBC). Fiber channel requires a dedicated connection between devices, and it not compatible with other protocols, such as IP.
+
+### d) iSCSi
+
+***iSCSi*** stands for Internet Small Computer Systems Interface. Wikipedia calls it an IP-based standard that allows block-level access to other devices over Local or Wide Area Networks. If I understand correctly, this means it effectively lets one device actively access, read, and write files onto another device on the same network. Compared to fiber channel, iSCSi is much more easier to implement.
+
+### e) Storage Area Network
+
+A ***Storage Area Network*** (SAN) is a specialized network dedicated to storage servers. It effectively combines a larger array of storage nodes in such a way that any server accessing them sees the data as locally attached, by providing block-level access, through the use of an interconnect such as Fiber Channel or iSCSi. SANs are very scalable, but require their own dedicated network hardware, which makes them relatively expensive.
+
+### f) Network Attached Storage
+
+***Network Attached Storage*** (NAS) is an alternative to SAN, typically implemented as a specialiized computer dedicated to nothing but data storage. NAS devices have extra space for storage devices and often use redundancy technology like RAID. They exist on a normal LAN instead of in their own dedicated nework, so are relatively easy to deploy when compared to SAN.
