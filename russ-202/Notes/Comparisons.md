@@ -9,7 +9,7 @@ i.e.
 - beautiful/more beautiful - красив*ый*/красив*ее*
 - warm/warmer - тепл*ый*/тепл*ее*
 
-
+<br/>
 
 ### Comparative words
 

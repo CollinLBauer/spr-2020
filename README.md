@@ -2,16 +2,20 @@
 
 *Collin Bauer*
 
-I'll be swapping between computers a lot this semester. Having a big repo for all of my classes will help a lot.
+This repository contains work from my Spring 2020 semester at College of Charleston. All work is my own unless otherwise noted.
 
-Classes may (likely will) have other repositories for class projects/etc. These will be documented where applicable.
+This was my last semester before the pandemic forced all our classes to be online.
 
 ---
 
 Subjects in repository
 
 - CSCI 340 - Operating Systems
-
 - CSCI 345 - Network Security
-
 - CSCI 392 - Seminar in Computing
+- RUSS 202 - Intermediate Russian 2
+
+
+---
+
+This repository will only ever be updated to remove sensitive or copyrighted information.
