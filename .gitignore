@@ -2,9 +2,13 @@
 *a.out
 *.exe
 *__pycache__/
-csci-340/Book/ostep-code
-csci-345/Book/263973122-security-in-computing-5-e-charles-p-pfleeger-pdf1.pdf
 scratch/
 .vscode/
-csci-392/Paper/examples
 220lab/
+
+csci-340/Book/ostep-code
+csci-345/Book/263973122-security-in-computing-5-e-charles-p-pfleeger-pdf1.pdf
+csci-392/Paper/examples
+csci-345/Book/
+csci-340/Book/
+russ-202/Голоса/
